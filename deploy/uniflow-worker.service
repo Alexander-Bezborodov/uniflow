@@ -1,0 +1,21 @@
+[Unit]
+Description=UniFlow webhook queue and reminders
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/uniflow
+ExecStart=/usr/bin/php7.4 /var/www/uniflow/bin/console.php worker
+Restart=always
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/www/uniflow/data
+
+[Install]
+WantedBy=multi-user.target

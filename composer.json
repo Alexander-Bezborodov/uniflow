@@ -1,0 +1,15 @@
+{
+  "name": "uniflow/telegram-bot",
+  "description": "UniFlow PHP webhook bot",
+  "type": "project",
+  "require": {
+    "php": ">=7.4",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*"
+  },
+  "config": {"platform": {"php": "7.4.33"}},
+  "scripts": {"test": "php tests/php/run.php"}
+}

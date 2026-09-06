@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+data/
+legacy/
+.git/
+vendor/
+*.db
+*.db-*
+*.backup-*
