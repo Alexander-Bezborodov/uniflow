@@ -8,6 +8,7 @@ final class Config
 {
     private array $values;
     public string $root;
+
     public function __construct(string $root, ?array $values = null)
     {
         $this->root = $root;
@@ -18,7 +19,11 @@ final class Config
                     continue;
                 }
                 $value = $m[2];
-                if (strlen($value) >= 2 && (($value[0] === '"' && substr($value, -1) === '"') || ($value[0] === "'" && substr($value, -1) === "'"))) {
+                if (
+                    strlen($value) >= 2 &&
+                    (($value[0] === '"' && substr($value, -1) === '"') ||
+                        ($value[0] === "'" && substr($value, -1) === "'"))
+                ) {
                     $value = substr($value, 1, -1);
                 }
                 $this->values[$m[1]] = $value;
@@ -26,10 +31,12 @@ final class Config
         }
         new \DateTimeZone($this->get('TIMEZONE', 'Asia/Yekaterinburg'));
     }
+
     public function get(string $key, string $default = ''): string
     {
-        return trim((string)($this->values[$key] ?? $default));
+        return trim((string) ($this->values[$key] ?? $default));
     }
+
     public function enabled(string $key, bool $default = false): bool
     {
         $v = strtolower($this->get($key, $default ? 'true' : 'false'));
@@ -38,15 +45,21 @@ final class Config
         }
         return $v === 'true';
     }
+
     public function path(string $key, string $default): string
     {
         $p = $this->get($key, $default);
         return $p[0] === '/' ? $p : $this->root . '/' . $p;
     }
+
     public function now(): \DateTimeImmutable
     {
-        return new \DateTimeImmutable('now', new \DateTimeZone($this->get('TIMEZONE', 'Asia/Yekaterinburg')));
+        return new \DateTimeImmutable(
+            'now',
+            new \DateTimeZone($this->get('TIMEZONE', 'Asia/Yekaterinburg')),
+        );
     }
+
     public function validate(): void
     {
         foreach (['curl', 'pdo_sqlite', 'mbstring'] as $ext) {

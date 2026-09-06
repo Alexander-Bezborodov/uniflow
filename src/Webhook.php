@@ -6,8 +6,13 @@ namespace UniFlow;
 
 final class Webhook
 {
-    public static function accept(Database $db, string $secret, string $method, string $supplied, string $body): int
-    {
+    public static function accept(
+        Database $db,
+        string $secret,
+        string $method,
+        string $supplied,
+        string $body
+    ): int {
         if ($method !== 'POST') {
             return 405;
         }
@@ -22,7 +27,12 @@ final class Webhook
         } catch (\JsonException $e) {
             return 400;
         }
-        if (!is_array($u) || !isset($u['update_id']) || !is_int($u['update_id']) || $u['update_id'] < 0) {
+        if (
+            !is_array($u) ||
+            !isset($u['update_id']) ||
+            !is_int($u['update_id']) ||
+            $u['update_id'] < 0
+        ) {
             return 400;
         }
         $db->enqueue($u);
