@@ -11,4 +11,4 @@
 
 GigaChat пока выключен. После получения Authorization key заполните `GIGACHAT_AUTH_KEY`, включите `GIGACHAT_ENABLED=true` и перезапустите обработчик.
 
-Подробности миграции, настройки сервиса и проверок: [README.md](README.md).
+Результаты проверок: [VERIFICATION.md](VERIFICATION.md).
