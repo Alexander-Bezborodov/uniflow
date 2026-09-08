@@ -21,15 +21,38 @@ final class Dates
         'декабря',
     ];
     public const DAY = 'понедельник\w*|вторник\w*|сред[ауы]|четверг\w*|пятниц\w*|суббот\w*|воскресень\w*';
-    public const DURATION = '~(?<![\w.,-])(?:\d+(?:[.,]\d+)?\s*(?:час(?:а|ов)?|ч\.?|минут(?:а|ы|у)?|мин\.?)|полтора\s+часа|полчаса|час)(?!\w)~iu';
+    public const EN_DAY = 'monday|tuesday|wednesday|thursday|friday|saturday|sunday';
+    public const EN_MONTH = 'january|february|march|april|may|june|july|august|september|october|november|december';
+    public const DURATION = '~(?<![\w.,-])(?:\d+(?:[.,]\d+)?\s*(?:час(?:а|ов)?|ч\.?|минут(?:а|ы|у)?|мин\.?|hours?|hrs?|h|minutes?|mins?)|полтора\s+часа|полчаса|час|one\s+and\s+a\s+half\s+hours?|half\s+an\s+hour)(?!\w)~iu';
 
     public static function pattern(): string
     {
-        return '(?:через\s+\d+\s+(?:дня|дней|день|неделю|недели|недель)|послезавтра|завтра|сегодня|вчера|(?:следующ\w*\s+)?(?:' .
+        $clock = '(?:\d{1,2}(?::\d{2})?\s*(?:am|pm)?|\d{1,2}:\d{2})';
+        $englishDate = '(?:day\s+after\s+tomorrow|tomorrow|today|yesterday|(?:next\s+)?(?:' .
+            self::EN_DAY .
+            ')|\d{1,2}\s+(?:' .
+            self::EN_MONTH .
+            ')(?:\s+\d{4})?|(?:' .
+            self::EN_MONTH .
+            ')\s+\d{1,2}(?:,?\s+\d{4})?)';
+        $russianDate = '(?:(?:сегодня\s+)?через\s+(?:\d+\s+)?(?:минут\w*|час(?:а|ов)?)|через\s+\d+\s+(?:дня|дней|день|неделю|недели|недель)|послезавтра|завтра|сегодня|вчера|(?:следующ\w*\s+)?(?:' .
             self::DAY .
             ')|\d{4}-\d{2}-\d{2}|\d{1,2}\.\d{1,2}(?:\.\d{4})?|\d{1,2}\s+(?:' .
             implode('|', self::MONTHS) .
-            ')(?:\s+\d{4})?)(?:\s*(?:в|к)?\s*\d{1,2}:\d{2})?';
+            ')(?:\s+\d{4})?)';
+        $russianTime = '(?:\s+(?:(?:в|к)\s+\d{1,2}(?::\d{2})?|\d{1,2}:\d{2}))?';
+        return '(?:' .
+            $russianDate .
+            $russianTime .
+            '|(?:' .
+            $englishDate .
+            ')(?:\s+(?:at\s+)?' .
+            $clock .
+            ')?|' .
+            $clock .
+            '\s+(?:' .
+            $englishDate .
+            '))';
     }
 
     public static function utc(\DateTimeImmutable $d): string
@@ -47,14 +70,99 @@ final class Dates
     public static function parse(string $text, \DateTimeImmutable $now): ?string
     {
         $s = preg_replace('~^(?:до|к|в)\s+~u', '', mb_strtolower(trim($text)));
+        $s = preg_replace_callback(
+            '~\b(1[0-2]|0?\d)(?::([0-5]\d))?\s*(am|pm)\b~u',
+            function (array $m): string {
+                $hour = (int) $m[1] % 12 + ($m[3] === 'pm' ? 12 : 0);
+                return sprintf(
+                    '%02d:%02d',
+                    $hour,
+                    isset($m[2]) && $m[2] !== '' ? (int) $m[2] : 0,
+                );
+            },
+            $s,
+        );
+        $englishDate = '(?:day\s+after\s+tomorrow|tomorrow|today|yesterday|(?:next\s+)?(?:' .
+            self::EN_DAY .
+            ')|\d{1,2}\s+(?:' .
+            self::EN_MONTH .
+            ')(?:\s+\d{4})?|(?:' .
+            self::EN_MONTH .
+            ')\s+\d{1,2}(?:,?\s+\d{4})?)';
+        if (preg_match('~^(\d{1,2}:\d{2})\s+(' . $englishDate . ')$~uD', $s, $ordered)) {
+            $s = $ordered[2] . ' ' . $ordered[1];
+        }
+        if (
+            preg_match(
+                '~^(' . self::EN_MONTH . ')\s+(\d{1,2})(?:,?\s+(\d{4}))?(.*)$~uD',
+                $s,
+                $monthFirst,
+            )
+        ) {
+            $s =
+                $monthFirst[2] .
+                ' ' .
+                $monthFirst[1] .
+                ($monthFirst[3] !== '' ? ' ' . $monthFirst[3] : '') .
+                $monthFirst[4];
+        }
+        $s = preg_replace('~\bat\s+(?=\d)~u', 'в ', $s);
+        $translations = [
+            'day after tomorrow' => 'послезавтра',
+            'tomorrow' => 'завтра',
+            'today' => 'сегодня',
+            'yesterday' => 'вчера',
+            'next' => 'следующая',
+            'monday' => 'понедельник',
+            'tuesday' => 'вторник',
+            'wednesday' => 'среда',
+            'thursday' => 'четверг',
+            'friday' => 'пятница',
+            'saturday' => 'суббота',
+            'sunday' => 'воскресенье',
+        ];
+        foreach (self::MONTHS as $index => $month) {
+            $translations[explode('|', self::EN_MONTH)[$index]] = $month;
+        }
+        $s = strtr($s, $translations);
+        $s = preg_replace('~\s+~u', ' ', trim($s));
         if (!preg_match('~^' . self::pattern() . '$~uD', $s)) {
             return null;
         }
+        if (
+            preg_match(
+                '~^(?:сегодня\s+)?через\s+(?:(\d+)\s+)?(минут\w*|час(?:а|ов)?)$~uD',
+                $s,
+                $relativeTime,
+            )
+        ) {
+            $amount = isset($relativeTime[1]) && $relativeTime[1] !== ''
+                ? (int) $relativeTime[1]
+                : 1;
+            $minutes = strpos($relativeTime[2], 'час') === 0 ? $amount * 60 : $amount;
+            if ($minutes < 1 || $minutes > 5256000) {
+                return null;
+            }
+            return self::utc($now->modify('+' . $minutes . ' minutes'));
+        }
         $h = 23;
         $min = 59;
-        if (preg_match('~\s*(?:в|к)?\s*(\d{1,2}):(\d{2})$~u', $s, $m, PREG_OFFSET_CAPTURE)) {
-            $h = (int) $m[1][0];
-            $min = (int) $m[2][0];
+        if (
+            preg_match(
+                '~\s+(?:(?:в|к)\s+(\d{1,2})(?::(\d{2}))?|(\d{1,2}):(\d{2}))$~u',
+                $s,
+                $m,
+                PREG_OFFSET_CAPTURE,
+            )
+        ) {
+            $firstHour = isset($m[1][0]) && $m[1][0] !== '';
+            if ($firstHour) {
+                $h = (int) $m[1][0];
+                $min = isset($m[2][0]) && $m[2][0] !== '' ? (int) $m[2][0] : 0;
+            } else {
+                $h = (int) $m[3][0];
+                $min = (int) $m[4][0];
+            }
             $s = trim(substr($s, 0, $m[0][1]));
         }
         if ($h > 23 || $min > 59) {
@@ -135,7 +243,7 @@ final class Dates
 
     public static function duration(string $s): ?int
     {
-        $s = preg_replace('~^(?:примерно|около|подготовка)\s+~u', '', mb_strtolower(trim($s)));
+        $s = preg_replace('~^(?:примерно|около|подготовка|about|approximately)\s+~u', '', mb_strtolower(trim($s)));
         if (ctype_digit($s)) {
             $n = (float) $s;
         } else {
@@ -146,16 +254,16 @@ final class Dates
             }
             $n = 0;
             foreach ($m[0] as $part) {
-                if ($part === 'полчаса') {
+                if ($part === 'полчаса' || $part === 'half an hour') {
                     $n += 30;
-                } elseif (preg_match('~^полтора~u', $part)) {
+                } elseif (preg_match('~^(?:полтора|one\s+and\s+a\s+half)~u', $part)) {
                     $n += 90;
                 } elseif ($part === 'час') {
                     $n += 60;
                 } else {
                     $n +=
                         (float) str_replace(',', '.', $part) *
-                        (strpos($part, 'ч') !== false ? 60 : 1);
+                        (preg_match('~(?:ч|hours?|hrs?|h)~u', $part) ? 60 : 1);
                 }
             }
         }
@@ -205,7 +313,7 @@ final class Dates
             $t['importance'] < 1 ||
             $t['importance'] > 3
         ) {
-            throw new \InvalidArgumentException('Важность: от 1 до 3.');
+            throw new \InvalidArgumentException('Не удалось сохранить задачу.');
         }
     }
 }

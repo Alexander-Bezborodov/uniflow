@@ -53,28 +53,28 @@ final class Planner
         return $tasks;
     }
 
-    public static function card(array $t, \DateTimeImmutable $now): string
+    public static function card(array $t, \DateTimeImmutable $now, string $language = 'ru'): string
     {
-        $priority = [
-            '',
-            '🟢 Низкий',
-            '🟡 Средний',
-            '🟠 Высокий',
-            '🔴 Очень высокий',
-            '🔴 Просрочено',
-        ];
+        $priority = $language === 'en'
+            ? ['', '🟢 Low', '🟡 Medium', '🔴 High']
+            : ['', '🟢 Низкий', '🟡 Средний', '🔴 Высокий'];
+        $subject = isset($t['subject']) && trim((string) $t['subject']) !== ''
+            ? "\n" .
+                ($language === 'en' ? 'Subject: ' : 'Предмет: ') .
+                Emojis::escape($t['subject'])
+            : "\n";
         return '<b>' .
             Emojis::escape($t['title']) .
-            "</b>\nПредмет: " .
-            Emojis::escape($t['subject'] ?? 'не указан') .
+            '</b>' .
+            $subject .
             "\n📅 " .
-            (isset($t['deadline']) ? Dates::label($t['deadline'], $now) : 'Уточни дедлайн') .
-            "\n⏱ " .
-            ($t['estimated_minutes'] ?? '?') .
-            ' мин · Важность: ' .
-            ($t['importance'] ?? 2) .
-            '/3' .
-            (isset($t['id']) ? "\n" . $priority[self::priority($t, $now)] : '');
+            (isset($t['deadline']) ? Dates::label($t['deadline'], $now) : ($language === 'en' ? 'Specify a deadline' : 'Уточни дедлайн')) .
+            (!isset($t['duration_visible']) || !empty($t['duration_visible'])
+                ? "\n⏱ " . ($t['estimated_minutes'] ?? '?') . ($language === 'en' ? ' min for the task' : ' мин на задачу')
+                : '') .
+            (!empty($t['importance_visible'])
+                ? "\n" . $priority[(int) ($t['importance'] ?? 2)]
+                : '');
     }
 
     public static function reasons(array $t, \DateTimeImmutable $now): array

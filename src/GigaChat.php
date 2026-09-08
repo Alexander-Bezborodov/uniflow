@@ -36,7 +36,7 @@ final class GigaChat
     private function token(bool $refresh = false): string
     {
         $key = $this->cacheKey();
-        $row = $this->db->one('SELECT value FROM cache WHERE key=?', [$key]);
+        $row = $this->db->getCache($key);
         $cached = $row ? json_decode($row['value'], true) : null;
         if (
             !$refresh &&
@@ -78,7 +78,10 @@ final class GigaChat
                 'Authorization: Basic ' . $auth,
             ],
             http_build_query(['scope' => $scope]),
-            $this->config->get('GIGACHAT_CA_BUNDLE'),
+            $this->config->path(
+                'GIGACHAT_CA_BUNDLE',
+                'certs/russian_trusted_root_ca.pem',
+            ),
         );
         $d = $r['data'];
         if (
@@ -97,10 +100,7 @@ final class GigaChat
             throw new \RuntimeException('invalid_token');
         }
         $d = ['access_token' => $d['access_token'], 'expires_at' => (int) $expiry];
-        $this->db->run(
-            'INSERT INTO cache(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value',
-            [$key, json_encode($d, JSON_THROW_ON_ERROR)],
-        );
+        $this->db->setCache($key, json_encode($d, JSON_THROW_ON_ERROR));
         return $d['access_token'];
     }
 
@@ -129,18 +129,21 @@ final class GigaChat
                 ],
                 json_encode(
                     [
-                        'model' => $this->config->get('GIGACHAT_MODEL', 'GigaChat'),
+                        'model' => $this->config->get('GIGACHAT_MODEL', 'GigaChat-2'),
                         'messages' => [
                             ['role' => 'system', 'content' => $system],
                             ['role' => 'user', 'content' => $input],
                         ],
                         'temperature' => 0.1,
-                        'max_tokens' => 2000,
+                        'max_tokens' => 700,
                         'stream' => false,
                     ],
                     JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR,
                 ),
-                $this->config->get('GIGACHAT_CA_BUNDLE'),
+                $this->config->path(
+                    'GIGACHAT_CA_BUNDLE',
+                    'certs/russian_trusted_root_ca.pem',
+                ),
             );
             if ($r['status'] === 401 && $i === 0) {
                 continue;

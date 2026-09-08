@@ -12,7 +12,14 @@ __pycache__/
 htmlcov/
 .DS_Store
 
-/data/
+/data/*
+!/data/.htaccess
 /vendor/
 *.backup-*
 *.worker.lock
+
+/output/
+/.codex-finalizer/
+/.codex-pptx-build/
+/tools/
+*.log

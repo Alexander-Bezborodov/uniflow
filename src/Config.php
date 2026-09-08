@@ -62,13 +62,43 @@ final class Config
 
     public function validate(): void
     {
-        foreach (['curl', 'pdo_sqlite', 'mbstring'] as $ext) {
+        foreach (['curl', 'pdo_mysql', 'mbstring'] as $ext) {
             if (!extension_loaded($ext)) {
                 throw new \RuntimeException('Missing extension: ' . $ext);
             }
         }
         if (!preg_match('/^\d+:[A-Za-z0-9_-]+$/', $this->get('BOT_TOKEN'))) {
             throw new \RuntimeException('Set BOT_TOKEN in .env');
+        }
+        $relayUrls = [
+            'TELEGRAM_RELAY_URL' => $this->get('TELEGRAM_RELAY_URL'),
+            'TELEGRAM_RELAY_WEBHOOK_URL' => $this->get(
+                'TELEGRAM_RELAY_WEBHOOK_URL',
+            ),
+        ];
+        foreach ($relayUrls as $key => $url) {
+            $parts = parse_url($url);
+            if (
+                !is_array($parts) ||
+                ($parts['scheme'] ?? '') !== 'https' ||
+                empty($parts['host']) ||
+                isset($parts['user']) ||
+                isset($parts['pass']) ||
+                isset($parts['fragment'])
+            ) {
+                throw new \RuntimeException('Set a valid ' . $key . ' in .env');
+            }
+        }
+        if (!preg_match('/^[a-f0-9]{64}$/i', $this->get('TELEGRAM_RELAY_TOKEN'))) {
+            throw new \RuntimeException('Set TELEGRAM_RELAY_TOKEN in .env');
+        }
+        if (
+            !preg_match(
+                '~^sha256//[A-Za-z0-9+/]{43}=$~',
+                $this->get('TELEGRAM_RELAY_PIN'),
+            )
+        ) {
+            throw new \RuntimeException('Set TELEGRAM_RELAY_PIN in .env');
         }
         if (!preg_match('/^[A-Za-z0-9_-]{32,256}$/', $this->get('WEBHOOK_SECRET'))) {
             throw new \RuntimeException('Set WEBHOOK_SECRET (32-256 characters)');

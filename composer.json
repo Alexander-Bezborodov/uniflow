@@ -8,6 +8,9 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pdo": "*",
+    "ext-pdo_mysql": "*"
+  },
+  "require-dev": {
     "ext-pdo_sqlite": "*"
   },
   "config": {"platform": {"php": "7.4.33"}},

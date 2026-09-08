@@ -6,6 +6,33 @@ namespace UniFlow;
 
 final class Webhook
 {
+    public static function handle(
+        Database $db,
+        Worker $worker,
+        string $secret,
+        string $method,
+        string $supplied,
+        string $body
+    ): int {
+        $status = self::accept($db, $secret, $method, $supplied, $body);
+        if ($status !== 200) {
+            return $status;
+        }
+
+        for ($i = 0; $i < 10; $i++) {
+            if (!$worker->update()) {
+                break;
+            }
+        }
+        for ($i = 0; $i < 30; $i++) {
+            if (!$worker->deliver()) {
+                break;
+            }
+        }
+
+        return 200;
+    }
+
     public static function accept(
         Database $db,
         string $secret,

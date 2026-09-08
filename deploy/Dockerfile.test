@@ -1,6 +1,6 @@
 FROM php:7.4-cli
 RUN apt-get update && apt-get install -y libonig-dev libsqlite3-dev \
-    && docker-php-ext-install mbstring pdo_sqlite \
+    && docker-php-ext-install mbstring pdo_mysql pdo_sqlite \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY . .

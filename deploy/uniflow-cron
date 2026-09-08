@@ -1,0 +1,1 @@
+* * * * * www-data /usr/bin/php7.4 /var/www/uniflow/bin/console.php reminders >/dev/null 2>&1

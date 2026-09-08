@@ -1,0 +1,11 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(?:bin|certs|data|deploy|src|tests)(?:/|$) - [F,L,NC]
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(?:db|sqlite|pem|log|lock|backup-.*)$">
+    Require all denied
+</FilesMatch>

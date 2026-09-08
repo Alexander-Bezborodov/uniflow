@@ -6,8 +6,13 @@ namespace UniFlow;
 
 class Http
 {
-    public function post(string $url, array $headers, string $body, string $ca = ''): array
-    {
+    public function post(
+        string $url,
+        array $headers,
+        string $body,
+        string $ca = '',
+        array $curlOptions = []
+    ): array {
         $ch = curl_init($url);
         $response = '';
         $options = [
@@ -29,6 +34,24 @@ class Http
         ];
         if ($ca !== '') {
             $options[CURLOPT_CAINFO] = $ca;
+        }
+        $allowedOptions = [
+            CURLOPT_SSL_VERIFYPEER,
+            CURLOPT_SSL_VERIFYHOST,
+            CURLOPT_PINNEDPUBLICKEY,
+        ];
+        if (
+            (($curlOptions[CURLOPT_SSL_VERIFYPEER] ?? true) === false ||
+                ($curlOptions[CURLOPT_SSL_VERIFYHOST] ?? 2) === false) &&
+            empty($curlOptions[CURLOPT_PINNEDPUBLICKEY])
+        ) {
+            throw new \InvalidArgumentException('public_key_pin_required');
+        }
+        foreach ($curlOptions as $option => $value) {
+            if (!in_array($option, $allowedOptions, true)) {
+                throw new \InvalidArgumentException('unsupported_curl_option');
+            }
+            $options[$option] = $value;
         }
         curl_setopt_array($ch, $options);
         $ok = curl_exec($ch);
