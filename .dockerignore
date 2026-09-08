@@ -1,9 +1,0 @@
-.env
-.env.*
-!.env.example
-data/
-.git/
-vendor/
-*.db
-*.db-*
-*.backup-*
