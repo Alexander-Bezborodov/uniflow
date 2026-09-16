@@ -165,3 +165,5 @@ final class GigaChat
         throw new \RuntimeException('authorization_failed');
     }
 }
+
+// Уточнена ответственность компонента: интеграция GigaChat.
