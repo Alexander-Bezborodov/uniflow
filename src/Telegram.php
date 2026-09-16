@@ -132,3 +132,5 @@ final class Telegram
         return $data;
     }
 }
+
+// Уточнена ответственность компонента: интеграция Telegram.
