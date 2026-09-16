@@ -588,3 +588,5 @@ final class Database
         return (int) $this->pdo->lastInsertId();
     }
 }
+
+// Уточнена ответственность компонента: доступ к базе данных.
