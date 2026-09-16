@@ -70,3 +70,5 @@ class Http
         return ['status' => $status, 'data' => $data];
     }
 }
+
+// Уточнена ответственность компонента: HTTP-клиент.
