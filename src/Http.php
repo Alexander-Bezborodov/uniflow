@@ -44,8 +44,8 @@ class Http
             CURLOPT_PINNEDPUBLICKEY,
         ];
         if (
-            (($curlOptions[CURLOPT_SSL_VERIFYPEER] ?? true) === false ||
-                ($curlOptions[CURLOPT_SSL_VERIFYHOST] ?? 2) === false) &&
+            (!(bool) ($curlOptions[CURLOPT_SSL_VERIFYPEER] ?? true) ||
+                (int) ($curlOptions[CURLOPT_SSL_VERIFYHOST] ?? 2) !== 2) &&
             empty($curlOptions[CURLOPT_PINNEDPUBLICKEY])
         ) {
             throw new \InvalidArgumentException('public_key_pin_required');
