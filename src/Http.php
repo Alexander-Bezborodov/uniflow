@@ -14,6 +14,9 @@ class Http
         array $curlOptions = []
     ): array {
         $ch = curl_init($url);
+        if ($ch === false) {
+            throw new \RuntimeException('transport_initialization_failed');
+        }
         $response = '';
         $options = [
             CURLOPT_POST => true,
