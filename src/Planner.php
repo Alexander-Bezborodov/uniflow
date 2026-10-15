@@ -21,6 +21,7 @@ final class Planner
 
     public static function minutes(int $minutes, string $deadline, \DateTimeImmutable $now): int
     {
+        $minutes = max(0, $minutes);
         $d = (new \DateTimeImmutable($deadline))->setTimezone($now->getTimezone());
         $days = max(1, (int) $now->setTime(0, 0)->diff($d->setTime(0, 0))->format('%r%a'));
         if ($d->getTimestamp() - $now->getTimestamp() <= 86400 || $days === 1) {
