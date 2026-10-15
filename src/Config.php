@@ -49,6 +49,9 @@ final class Config
     public function path(string $key, string $default): string
     {
         $p = $this->get($key, $default);
+        if ($p === '') {
+            return $this->root;
+        }
         return $p[0] === '/' ? $p : $this->root . '/' . $p;
     }
 
