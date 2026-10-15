@@ -74,7 +74,7 @@ final class Planner
                 ? "\n⏱ " . ($t['estimated_minutes'] ?? '?') . ($language === 'en' ? ' min for the task' : ' мин на задачу')
                 : '') .
             (!empty($t['importance_visible'])
-                ? "\n" . $priority[(int) ($t['importance'] ?? 2)]
+                ? "\n" . $priority[max(1, min(3, (int) ($t['importance'] ?? 2)))]
                 : '');
     }
 
