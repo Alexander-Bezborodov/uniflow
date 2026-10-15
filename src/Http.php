@@ -56,7 +56,13 @@ class Http
             }
             $options[$option] = $value;
         }
-        curl_setopt_array($ch, $options);
+        if (!curl_setopt_array($ch, $options)) {
+            if (PHP_VERSION_ID < 80000) {
+                curl_close($ch);
+            }
+            unset($ch);
+            throw new \RuntimeException('transport_configuration_failed');
+        }
         $ok = curl_exec($ch);
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if (PHP_VERSION_ID < 80000) {
