@@ -17,6 +17,9 @@ final class Telegram
 
     public function request(string $method, array $data): array
     {
+        if (!preg_match('/^[A-Za-z][A-Za-z0-9_]*$/D', $method)) {
+            throw new \InvalidArgumentException('invalid_telegram_method');
+        }
         if (!$this->config->enabled('CUSTOM_EMOJI_ENABLED', true)) {
             $data = $this->plain($data);
         }
