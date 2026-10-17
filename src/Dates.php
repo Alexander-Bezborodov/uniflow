@@ -121,8 +121,9 @@ final class Dates
             'saturday' => 'суббота',
             'sunday' => 'воскресенье',
         ];
+        $englishMonths = explode('|', self::EN_MONTH);
         foreach (self::MONTHS as $index => $month) {
-            $translations[explode('|', self::EN_MONTH)[$index]] = $month;
+            $translations[$englishMonths[$index]] = $month;
         }
         $s = strtr($s, $translations);
         $s = preg_replace('~\s+~u', ' ', trim($s));
