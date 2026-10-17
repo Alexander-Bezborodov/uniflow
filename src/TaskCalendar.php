@@ -51,6 +51,9 @@ final class TaskCalendar
         if (!preg_match('/^\d{4}-(0[1-9]|1[0-2])$/', $month)) {
             throw new \InvalidArgumentException('Invalid calendar month');
         }
+        if (!is_file($font) || !is_readable($font)) {
+            throw new \InvalidArgumentException('Calendar font unavailable');
+        }
         $start = new \DateTimeImmutable($month . '-01', $now->getTimezone());
         $offset = (int) $start->format('N') - 1;
         $weeks = (int) ceil(($offset + (int) $start->format('t')) / 7);
