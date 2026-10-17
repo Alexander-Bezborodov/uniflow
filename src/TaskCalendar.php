@@ -34,6 +34,9 @@ final class TaskCalendar
         }
         $tmp = tempnam($dir, 'tmp');
         if ($tmp === false || file_put_contents($tmp, $png) === false || !rename($tmp, $file)) {
+            if (is_string($tmp) && is_file($tmp)) {
+                unlink($tmp);
+            }
             throw new \RuntimeException('Calendar cache write failed');
         }
         $target = $config->get('CALENDAR_PUBLIC_URL') . '?key=' . $key;
