@@ -95,6 +95,9 @@ final class Telegram
             $response['status'] >= 300 ||
             $returnedTarget !== $targetUrl ||
             !is_array($parts) ||
+            isset($parts['user']) ||
+            isset($parts['pass']) ||
+            isset($parts['fragment']) ||
             ($parts['scheme'] ?? '') !== 'https' ||
             ($parts['host'] ?? '') !== parse_url($this->config->get('TELEGRAM_RELAY_WEBHOOK_URL'), PHP_URL_HOST) ||
             strpos($parts['path'] ?? '', '/webhook/') !== 0
