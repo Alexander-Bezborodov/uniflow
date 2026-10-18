@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_IMPORTANCE = 'importance';
+
     private Database $db;
     private Config $config;
     private GigaChat $ai;
@@ -96,7 +98,7 @@ final class Bot
                     'title' => $t['title'],
                     'deadline' => Dates::label($t['deadline'], $now),
                     'estimated_minutes' => (int) $t['estimated_minutes'],
-                    'importance' => (int) $t['importance'],
+                    self::FIELD_KEY_IMPORTANCE => (int) $t['importance'],
                     'allowed_reasons' => Planner::reasons($t, $now),
                 ];
             }
