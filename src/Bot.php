@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_ALLOWED_REASONS = 'allowed_reasons';
+
     private const FIELD_KEY_IMPORTANCE = 'importance';
 
     private Database $db;
@@ -99,7 +101,7 @@ final class Bot
                     'deadline' => Dates::label($t['deadline'], $now),
                     'estimated_minutes' => (int) $t['estimated_minutes'],
                     self::FIELD_KEY_IMPORTANCE => (int) $t['importance'],
-                    'allowed_reasons' => Planner::reasons($t, $now),
+                    self::FIELD_KEY_ALLOWED_REASONS => Planner::reasons($t, $now),
                 ];
             }
             $english = ($user['language'] ?? 'ru') === 'en';
