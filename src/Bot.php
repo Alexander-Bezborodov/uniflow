@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_STEPS = 'steps';
+
     private const FIELD_KEY_LANGUAGE = 'language';
 
     private const FIELD_KEY_ALLOWED_REASONS = 'allowed_reasons';
@@ -115,7 +117,7 @@ final class Bot
                 json_encode($facts, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
             );
             if (
-                !isset($result['steps']) ||
+                !isset($result[self::FIELD_KEY_STEPS]) ||
                 !is_array($result['steps']) ||
                 count($result['steps']) !== count($facts)
             ) {
