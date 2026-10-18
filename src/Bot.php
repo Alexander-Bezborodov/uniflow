@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_LANGUAGE = 'language';
+
     private const FIELD_KEY_ALLOWED_REASONS = 'allowed_reasons';
 
     private const FIELD_KEY_IMPORTANCE = 'importance';
@@ -104,7 +106,7 @@ final class Bot
                     self::FIELD_KEY_ALLOWED_REASONS => Planner::reasons($t, $now),
                 ];
             }
-            $english = ($user['language'] ?? 'ru') === 'en';
+            $english = ($user[self::FIELD_KEY_LANGUAGE] ?? 'ru') === 'en';
             $instruction = $english
                 ? 'Create a logical sequence using the supplied task order. For task 1 start advice with "First", for task 2 with "Then", and for task 3 with "After that". Choose one reason from allowed_reasons and briefly explain the position using only deadline, duration, and importance. Do not say that every task should be started now. Do not invent dependencies. Return only JSON {"steps":[{"task_ref":1,"reason":"deadline","advice":"First, I would handle this task because it has the closest deadline."}]}. advice must contain 10-220 characters and one short sentence. Keep the task order and count.'
                 : 'Составь логичную последовательность в переданном порядке задач. Совет для задачи 1 начни со слова «Сначала», для задачи 2 - «Затем», для задачи 3 - «После этого». Выбери одну причину из allowed_reasons и кратко объясни место задачи в порядке, используя только срок, длительность и важность. Не говори, что каждую задачу нужно начать сейчас. Не выдумывай зависимости между задачами. Верни только JSON {"steps":[{"task_ref":1,"reason":"deadline","advice":"Сначала я бы занялся этой задачей, потому что у неё ближайший срок."}]}. advice: 10-220 символов, одно короткое предложение. Сохрани порядок и количество задач.';
