@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_ADVICE = 'advice';
+
     private const FIELD_KEY_REASON = 'reason';
 
     private const FIELD_KEY_STEPS = 'steps';
@@ -133,7 +135,7 @@ final class Bot
                 if (
                     ($step['task_ref'] ?? null) !== $i + 1 ||
                     !in_array($step[self::FIELD_KEY_REASON] ?? '', $facts[$i]['allowed_reasons'], true) ||
-                    !isset($step['advice']) ||
+                    !isset($step[self::FIELD_KEY_ADVICE]) ||
                     !is_string($step['advice']) ||
                     mb_strlen(trim($step['advice'])) < 10 ||
                     mb_strlen($step['advice']) > 220
