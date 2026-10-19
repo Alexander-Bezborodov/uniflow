@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_METHOD = 'method';
+
     private const FIELD_KEY_ADVICE = 'advice';
 
     private const FIELD_KEY_REASON = 'reason';
@@ -176,7 +178,7 @@ final class Bot
         $callback = $u['callback_query']['data'] ?? '';
         if ($this->shouldParseWithAi($state, $user, $text)) {
             return [
-                'method' => 'sendMessage',
+                self::FIELD_KEY_METHOD => 'sendMessage',
                 'payload' => [
                     'chat_id' => $from['id'],
                     'text' => Emojis::render(
