@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_CHAT_ID = 'chat_id';
+
     private const FIELD_KEY_PAYLOAD = 'payload';
 
     private const FIELD_KEY_METHOD = 'method';
@@ -182,7 +184,7 @@ final class Bot
             return [
                 self::FIELD_KEY_METHOD => 'sendMessage',
                 self::FIELD_KEY_PAYLOAD => [
-                    'chat_id' => $from['id'],
+                    self::FIELD_KEY_CHAT_ID => $from['id'],
                     'text' => Emojis::render(
                         $language === 'en'
                             ? '⏳ Almost done creating the task...'
