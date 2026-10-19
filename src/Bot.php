@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_PARSE_MODE = 'parse_mode';
+
     private const FIELD_KEY_CHAT_ID = 'chat_id';
 
     private const FIELD_KEY_PAYLOAD = 'payload';
@@ -190,7 +192,7 @@ final class Bot
                             ? '⏳ Almost done creating the task...'
                             : '⏳ Уже почти создали задачу...',
                     ),
-                    'parse_mode' => 'HTML',
+                    self::FIELD_KEY_PARSE_MODE => 'HTML',
                     'reply_markup' => Emojis::keyboard([
                         [$language === 'en' ? '❌ Cancel' : '❌ Отменить'],
                     ]),
