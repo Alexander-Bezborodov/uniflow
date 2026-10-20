@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_CALLBACK_QUERY_ID = 'callback_query_id';
+
     private const FIELD_KEY_PROVIDER = 'provider';
 
     private const FIELD_KEY_MESSAGE_ID = 'message_id';
@@ -279,7 +281,7 @@ final class Bot
         if (!$existingProfile && $this->action($incomingText) !== 'start') {
             if (isset($u['callback_query']['id'])) {
                 $this->db->out('answerCallbackQuery', [
-                    'callback_query_id' => $u['callback_query']['id'],
+                    self::FIELD_KEY_CALLBACK_QUERY_ID => $u['callback_query']['id'],
                 ]);
             }
             $this->s = [];
