@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_PROVIDER = 'provider';
+
     private const FIELD_KEY_MESSAGE_ID = 'message_id';
 
     private const FIELD_KEY_REPLY_MARKUP = 'reply_markup';
@@ -229,7 +231,7 @@ final class Bot
     private function shouldParseWithAi(array $state, ?array $user, $text): bool
     {
         $step = $state['step'] ?? '';
-        $acceptsTask = $step === '' || ($step === 'ai_input' && ($state['provider'] ?? false));
+        $acceptsTask = $step === '' || ($step === 'ai_input' && ($state[self::FIELD_KEY_PROVIDER] ?? false));
         $cleanText = is_string($text) ? trim($text) : '';
         return
             $acceptsTask &&
