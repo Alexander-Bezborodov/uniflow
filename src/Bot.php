@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_MESSAGE_ID = 'message_id';
+
     private const FIELD_KEY_REPLY_MARKUP = 'reply_markup';
 
     private const FIELD_KEY_PARSE_MODE = 'parse_mode';
@@ -205,7 +207,7 @@ final class Bot
             ($state['step'] ?? '') === 'ai_choice' &&
             ($state['action'] ?? '') === 'explain' &&
             $callback === 'ai:' . ($state['token'] ?? '') . ':provider' &&
-            isset($u['callback_query']['message']['message_id'])
+            isset($u['callback_query']['message'][self::FIELD_KEY_MESSAGE_ID])
         ) {
             return [
                 'method' => 'editMessageText',
