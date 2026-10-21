@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_AUTO_SAVE = 'auto_save';
+
     private const FIELD_KEY_FIELD = 'field';
 
     private const FIELD_KEY_INLINE_KEYBOARD = 'inline_keyboard';
@@ -605,7 +607,7 @@ final class Bot
         }
         $this->s = [
             'drafts' => $drafts,
-            'auto_save' => count($drafts) === 1,
+            self::FIELD_KEY_AUTO_SAVE => count($drafts) === 1,
             'source' => 'GigaChat',
         ];
         foreach ($this->s['drafts'] as &$draft) {
