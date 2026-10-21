@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_MODE = 'mode';
+
     private const FIELD_KEY_DURATION_VISIBLE = 'duration_visible';
 
     private const FIELD_KEY_AUTO_SAVE = 'auto_save';
@@ -747,7 +749,7 @@ final class Bot
         if ($field === 'importance') {
             $rows = [['🟢 Обычная'], ['🟡 Важная'], ['🔴 Очень важная']];
         }
-        if (in_array($this->s['mode'] ?? '', ['edit', 'saved_edit'], true)) {
+        if (in_array($this->s[self::FIELD_KEY_MODE] ?? '', ['edit', 'saved_edit'], true)) {
             $rows[] = [$this->l('Оставить', 'Keep')];
         }
         $rows[] = [$this->l('Отмена', 'Cancel')];
