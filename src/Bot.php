@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_INLINE_KEYBOARD = 'inline_keyboard';
+
     private const FIELD_KEY_CALLBACK_QUERY_ID = 'callback_query_id';
 
     private const FIELD_KEY_PROVIDER = 'provider';
@@ -332,7 +334,7 @@ final class Bot
                 'text' => Emojis::render($text),
                 'parse_mode' => 'HTML',
             ];
-            if ($keyboard !== null && isset($keyboard['inline_keyboard'])) {
+            if ($keyboard !== null && isset($keyboard[self::FIELD_KEY_INLINE_KEYBOARD])) {
                 $payload['reply_markup'] = $keyboard;
             }
             $this->db->out('editMessageText', $payload);
