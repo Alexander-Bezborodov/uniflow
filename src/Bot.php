@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_FIELD = 'field';
+
     private const FIELD_KEY_INLINE_KEYBOARD = 'inline_keyboard';
 
     private const FIELD_KEY_CALLBACK_QUERY_ID = 'callback_query_id';
@@ -536,7 +538,7 @@ final class Bot
         }
         if (
             $step === 'field' &&
-            ($this->s['field'] ?? '') === 'deadline' &&
+            ($this->s[self::FIELD_KEY_FIELD] ?? '') === 'deadline' &&
             $action === 'today' &&
             $text[0] !== '/'
         ) {
