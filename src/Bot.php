@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_DURATION_VISIBLE = 'duration_visible';
+
     private const FIELD_KEY_AUTO_SAVE = 'auto_save';
 
     private const FIELD_KEY_FIELD = 'field';
@@ -612,7 +614,7 @@ final class Bot
         ];
         foreach ($this->s['drafts'] as &$draft) {
             $draft['importance'] = 2;
-            $draft['duration_visible'] = empty($draft['estimated_minutes']) ? 0 : 1;
+            $draft[self::FIELD_KEY_DURATION_VISIBLE] = empty($draft['estimated_minutes']) ? 0 : 1;
         }
         unset($draft);
         $this->fill();
