@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_DURATION_INDEX = 'duration_index';
+
     private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
 
     private const FIELD_KEY_INDEX = 'index';
@@ -902,7 +904,7 @@ final class Bot
         }
         foreach ($this->s['drafts'] as $i => $draft) {
             if (empty($draft['estimated_minutes'])) {
-                $this->s['duration_index'] = $i;
+                $this->s[self::FIELD_KEY_DURATION_INDEX] = $i;
                 $this->askDuration();
                 return;
             }
