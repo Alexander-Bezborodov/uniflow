@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
+
     private const FIELD_KEY_INDEX = 'index';
 
     private const FIELD_KEY_MODE = 'mode';
@@ -816,7 +818,7 @@ final class Bot
             $this->s['drafts'][$i]['duration_visible'] = 1;
         }
         if ($f === 'importance') {
-            $this->s['drafts'][$i]['importance_visible'] = 1;
+            $this->s['drafts'][$i][self::FIELD_KEY_IMPORTANCE_VISIBLE] = 1;
         }
         if ($mode === 'saved_edit') {
             if ($keep) {
