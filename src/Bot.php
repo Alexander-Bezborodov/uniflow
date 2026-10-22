@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_INDEX = 'index';
+
     private const FIELD_KEY_MODE = 'mode';
 
     private const FIELD_KEY_DURATION_VISIBLE = 'duration_visible';
@@ -756,7 +758,7 @@ final class Bot
         if (count($this->s['drafts']) > 1) {
             $text =
                 $this->l('Задача ', 'Task ') .
-                ($this->s['index'] + 1) .
+                ($this->s[self::FIELD_KEY_INDEX] + 1) .
                 '/' .
                 count($this->s['drafts']) .
                 "\n" .
