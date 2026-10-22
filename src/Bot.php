@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_PRIORITY_SELECTED = 'priority_selected';
+
     private const FIELD_KEY_DURATION_INDEX = 'duration_index';
 
     private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
@@ -909,7 +911,7 @@ final class Bot
                 return;
             }
         }
-        if (empty($this->s['priority_selected'])) {
+        if (empty($this->s[self::FIELD_KEY_PRIORITY_SELECTED])) {
             $this->s['priority_index'] = 0;
             $this->askPriority();
             return;
