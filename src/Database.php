@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_PORT = 'port';
+
     private const FIELD_KEY_HOST = 'host';
 
     public const SCHEMA_VERSION = 5;
@@ -22,7 +24,7 @@ final class Database
                 'mysql:host=' .
                 $settings[self::FIELD_KEY_HOST] .
                 ';port=' .
-                $settings['port'] .
+                $settings[self::FIELD_KEY_PORT] .
                 ';dbname=' .
                 $settings['name'] .
                 ';charset=utf8mb4';
