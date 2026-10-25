@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_HOST = 'host';
+
     public const SCHEMA_VERSION = 5;
 
     public \PDO $pdo;
@@ -18,7 +20,7 @@ final class Database
             $settings = self::settings($source);
             $dsn =
                 'mysql:host=' .
-                $settings['host'] .
+                $settings[self::FIELD_KEY_HOST] .
                 ';port=' .
                 $settings['port'] .
                 ';dbname=' .
