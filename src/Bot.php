@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_VOLUME = 'volume';
+
     private const FIELD_KEY_PRIORITY_INDEX = 'priority_index';
 
     private const FIELD_KEY_PRIORITY_SELECTED = 'priority_selected';
@@ -1772,7 +1774,7 @@ final class Bot
             'deadline' => 'it has the closest deadline',
             'prepare' => 'this will spread out the workload',
             'importance' => 'it has high importance',
-            'volume' => 'it will take more time',
+            self::FIELD_KEY_VOLUME => 'it will take more time',
         ] : [
             'deadline' => 'у неё ближайший срок',
             'prepare' => 'так получится спокойнее распределить нагрузку',
