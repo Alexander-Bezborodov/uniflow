@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_USER = 'user';
+
     private const FIELD_KEY_NAME = 'name';
 
     private const FIELD_KEY_PORT = 'port';
@@ -30,7 +32,7 @@ final class Database
                 ';dbname=' .
                 $settings[self::FIELD_KEY_NAME] .
                 ';charset=utf8mb4';
-            $this->pdo = new \PDO($dsn, $settings['user'], $settings['pass'], [
+            $this->pdo = new \PDO($dsn, $settings[self::FIELD_KEY_USER], $settings['pass'], [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
                 \PDO::ATTR_EMULATE_PREPARES => false,
