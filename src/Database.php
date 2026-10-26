@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_LANGUAGE = 'language';
+
     private const FIELD_KEY_CREATED_AT = 'created_at';
 
     private const FIELD_KEY_PASS = 'pass';
@@ -374,7 +376,7 @@ final class Database
                         (int) ($user['timezone_confirmed'] ?? 0),
                         (int) ($user['telegram_blocked'] ?? 0),
                         (int) ($user['ai_consent'] ?? 0),
-                        in_array($user['language'] ?? 'ru', ['ru', 'en'], true) ? $user['language'] : 'ru',
+                        in_array($user[self::FIELD_KEY_LANGUAGE] ?? 'ru', ['ru', 'en'], true) ? $user['language'] : 'ru',
                     ],
                 );
             }
