@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_CREATED_AT = 'created_at';
+
     private const FIELD_KEY_PASS = 'pass';
 
     private const FIELD_KEY_USER = 'user';
@@ -367,7 +369,7 @@ final class Database
                         null,
                         $user['full_name'] ?? null,
                         $user['timezone'] ?? 'Asia/Yekaterinburg',
-                        $user['created_at'],
+                        $user[self::FIELD_KEY_CREATED_AT],
                         (int) ($user['reminders_disabled'] ?? 0),
                         (int) ($user['timezone_confirmed'] ?? 0),
                         (int) ($user['telegram_blocked'] ?? 0),
