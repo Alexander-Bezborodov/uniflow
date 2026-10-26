@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_ID = 'id';
+
     private const FIELD_KEY_LANGUAGE = 'language';
 
     private const FIELD_KEY_CREATED_AT = 'created_at';
@@ -384,7 +386,7 @@ final class Database
                 $this->run(
                     'INSERT IGNORE INTO tasks(id,user_id,title,subject,deadline,estimated_minutes,duration_visible,importance,importance_visible,status,created_at,completed_at,reminder_24h_sent,reminder_3h_sent,is_demo,revision) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                     [
-                        $task['id'],
+                        $task[self::FIELD_KEY_ID],
                         $task['user_id'],
                         $task['title'],
                         $task['subject'] ?? null,
