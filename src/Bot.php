@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_TOKEN = 'token';
+
     private const FIELD_KEY_VOLUME = 'volume';
 
     private const FIELD_KEY_PRIORITY_INDEX = 'priority_index';
@@ -122,7 +124,7 @@ final class Bot
         $explain =
             ($state['step'] ?? '') === 'ai_choice' &&
             ($state['action'] ?? '') === 'explain' &&
-            $callback === 'ai:' . ($state['token'] ?? '') . ':provider';
+            $callback === 'ai:' . ($state[self::FIELD_KEY_TOKEN] ?? '') . ':provider';
         if (!$parse && !$explain) {
             return [];
         }
