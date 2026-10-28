@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_FROM = 'from';
+
     private const FIELD_KEY_MESSAGE = 'message';
 
     private const FIELD_KEY_REVISION = 'revision';
@@ -443,7 +445,7 @@ final class Database
     {
         foreach ($this->run('SELECT id,payload FROM updates')->fetchAll() as $update) {
             $payload = json_decode($update['payload'], true);
-            $from = $payload[self::FIELD_KEY_MESSAGE]['from']['id'] ?? $payload['callback_query']['from']['id'] ?? null;
+            $from = $payload[self::FIELD_KEY_MESSAGE][self::FIELD_KEY_FROM]['id'] ?? $payload['callback_query']['from']['id'] ?? null;
             if ((int) $from === $user) {
                 $this->run('DELETE FROM updates WHERE id=?', [$update['id']]);
             }
