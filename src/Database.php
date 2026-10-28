@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
+
     private const FIELD_KEY_ID = 'id';
 
     private const FIELD_KEY_LANGUAGE = 'language';
@@ -394,7 +396,7 @@ final class Database
                         (int) ($task['estimated_minutes'] ?? 60),
                         (int) ($task['duration_visible'] ?? 1),
                         (int) ($task['importance'] ?? 2),
-                        (int) ($task['importance_visible'] ?? 0),
+                        (int) ($task[self::FIELD_KEY_IMPORTANCE_VISIBLE] ?? 0),
                         $task['status'] ?? 'active',
                         $task['created_at'],
                         $task['completed_at'] ?? null,
