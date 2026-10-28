@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_REVISION = 'revision';
+
     private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
 
     private const FIELD_KEY_ID = 'id';
@@ -403,7 +405,7 @@ final class Database
                         (int) ($task['reminder_24h_sent'] ?? 0),
                         (int) ($task['reminder_3h_sent'] ?? 0),
                         (int) ($task['is_demo'] ?? 0),
-                        (int) ($task['revision'] ?? 0),
+                        (int) ($task[self::FIELD_KEY_REVISION] ?? 0),
                     ],
                 );
             }
