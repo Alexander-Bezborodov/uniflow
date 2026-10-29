@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_CHAT = 'chat';
+
     private const FIELD_KEY_USERNAME = 'username';
 
     private const FIELD_KEY_CALLBACK_QUERY = 'callback_query';
@@ -483,7 +485,7 @@ final class Database
     public function enqueue(array $update): void
     {
         unset($update['message']['from'][self::FIELD_KEY_USERNAME]);
-        unset($update['message']['chat']['username']);
+        unset($update['message'][self::FIELD_KEY_CHAT]['username']);
         unset($update['callback_query']['from']['username']);
         unset($update['callback_query']['message']['from']['username']);
         unset($update['callback_query']['message']['chat']['username']);
