@@ -234,7 +234,7 @@ final class Bot
         if (
             ($state['step'] ?? '') === 'ai_choice' &&
             ($state['action'] ?? '') === 'explain' &&
-            $callback === 'ai:' . ($state['token'] ?? '') . ':provider' &&
+            $callback === 'ai:' . ($state[self::FIELD_KEY_TOKEN] ?? '') . ':provider' &&
             isset($u['callback_query']['message'][self::FIELD_KEY_MESSAGE_ID])
         ) {
             return [
