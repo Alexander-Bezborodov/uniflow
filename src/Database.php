@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_CHAT_ID = 'chat_id';
+
     private const FIELD_KEY_CHAT = 'chat';
 
     private const FIELD_KEY_USERNAME = 'username';
@@ -520,7 +522,7 @@ final class Database
 
     public function send(int $id, string $text, ?array $keyboard = null): void
     {
-        $p = ['chat_id' => $id, 'text' => Emojis::render($text), 'parse_mode' => 'HTML'];
+        $p = [self::FIELD_KEY_CHAT_ID => $id, 'text' => Emojis::render($text), 'parse_mode' => 'HTML'];
         if ($keyboard !== null) {
             $p['reply_markup'] = $keyboard;
         }
