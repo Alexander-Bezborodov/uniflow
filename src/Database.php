@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_REPLY_MARKUP = 'reply_markup';
+
     private const FIELD_KEY_PARSE_MODE = 'parse_mode';
 
     private const FIELD_KEY_CHAT_ID = 'chat_id';
@@ -526,7 +528,7 @@ final class Database
     {
         $p = [self::FIELD_KEY_CHAT_ID => $id, 'text' => Emojis::render($text), self::FIELD_KEY_PARSE_MODE => 'HTML'];
         if ($keyboard !== null) {
-            $p['reply_markup'] = $keyboard;
+            $p[self::FIELD_KEY_REPLY_MARKUP] = $keyboard;
         }
         $this->out('sendMessage', $p);
     }
