@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Dates
 {
+    private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
+
     private const FIELD_KEY_DEADLINE = 'deadline';
 
     public const MONTHS = [
@@ -303,7 +305,7 @@ final class Dates
             throw new \InvalidArgumentException('Укажи будущий дедлайн.');
         }
         if (
-            !isset($t['estimated_minutes']) ||
+            !isset($t[self::FIELD_KEY_ESTIMATED_MINUTES]) ||
             !is_int($t['estimated_minutes']) ||
             $t['estimated_minutes'] < 1 ||
             $t['estimated_minutes'] > 10080
