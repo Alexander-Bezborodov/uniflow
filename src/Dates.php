@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Dates
 {
+    private const FIELD_KEY_IMPORTANCE = 'importance';
+
     private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
 
     private const FIELD_KEY_DEADLINE = 'deadline';
@@ -313,7 +315,7 @@ final class Dates
             throw new \InvalidArgumentException('Время: от 1 до 10080 минут.');
         }
         if (
-            !isset($t['importance']) ||
+            !isset($t[self::FIELD_KEY_IMPORTANCE]) ||
             !is_int($t['importance']) ||
             $t['importance'] < 1 ||
             $t['importance'] > 3
