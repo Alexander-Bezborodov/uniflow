@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Dates
 {
+    private const FIELD_KEY_DEADLINE = 'deadline';
+
     public const MONTHS = [
         'января',
         'февраля',
@@ -290,7 +292,7 @@ final class Dates
             throw new \InvalidArgumentException('Предмет: от 1 до 100 символов.');
         }
         if (
-            !isset($t['deadline']) ||
+            !isset($t[self::FIELD_KEY_DEADLINE]) ||
             !is_string($t['deadline']) ||
             !preg_match(
                 '~^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$~D',
