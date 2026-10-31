@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class GigaChat
 {
+    private const FIELD_KEY_DATA = 'data';
+
     private const FIELD_KEY_EXPIRES_AT = 'expires_at';
 
     private const FIELD_KEY_ACCESS_TOKEN = 'access_token';
@@ -87,7 +89,7 @@ final class GigaChat
                 'certs/russian_trusted_root_ca.pem',
             ),
         );
-        $d = $r['data'];
+        $d = $r[self::FIELD_KEY_DATA];
         if (
             $r['status'] !== 200 ||
             !isset($d['access_token'], $d['expires_at']) ||
