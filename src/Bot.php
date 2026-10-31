@@ -681,7 +681,7 @@ final class Bot
     private function navigate(string $action): void
     {
         if ($action === 'start') {
-            $this->s = ['step' => 'onboarding', 'token' => $this->token()];
+            $this->s = ['step' => 'onboarding', self::FIELD_KEY_TOKEN => $this->token()];
             $this->db->sendRich(
                 $this->user,
                 $this->welcomeMarkdown(),
