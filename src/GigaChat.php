@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class GigaChat
 {
+    private const FIELD_KEY_ACCESS_TOKEN = 'access_token';
+
     private Config $config;
     private Database $db;
     private Http $http;
@@ -40,7 +42,7 @@ final class GigaChat
         $cached = $row ? json_decode($row['value'], true) : null;
         if (
             !$refresh &&
-            isset($cached['access_token'], $cached['expires_at']) &&
+            isset($cached[self::FIELD_KEY_ACCESS_TOKEN], $cached['expires_at']) &&
             $cached['expires_at'] > time() + 60
         ) {
             return $cached['access_token'];
