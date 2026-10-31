@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Emojis
 {
+    private const FIELD_KEY_TEXT = 'text';
+
     public const MAP = [
         '📚' => ['5258328383183396223', '📖'],
         '📖' => ['5258328383183396223', '📖'],
@@ -80,7 +82,7 @@ final class Emojis
 
     public static function button(string $label, ?string $callback = null): array
     {
-        $b = ['text' => self::normalize($label)];
+        $b = [self::FIELD_KEY_TEXT => self::normalize($label)];
         foreach (self::MAP as $emoji => $pair) {
             if (strpos($label, $emoji) === 0) {
                 $b['text'] = trim(str_replace("\u{FE0F}", '', substr($label, strlen($emoji))));
