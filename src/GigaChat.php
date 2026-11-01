@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class GigaChat
 {
+    private const FIELD_KEY_STATUS = 'status';
+
     private const FIELD_KEY_DATA = 'data';
 
     private const FIELD_KEY_EXPIRES_AT = 'expires_at';
@@ -91,7 +93,7 @@ final class GigaChat
         );
         $d = $r[self::FIELD_KEY_DATA];
         if (
-            $r['status'] !== 200 ||
+            $r[self::FIELD_KEY_STATUS] !== 200 ||
             !isset($d['access_token'], $d['expires_at']) ||
             !is_string($d['access_token'])
         ) {
