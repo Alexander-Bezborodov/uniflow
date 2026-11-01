@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class GigaChat
 {
+    private const FIELD_KEY_ROLE = 'role';
+
     private const FIELD_KEY_STATUS = 'status';
 
     private const FIELD_KEY_DATA = 'data';
@@ -139,7 +141,7 @@ final class GigaChat
                     [
                         'model' => $this->config->get('GIGACHAT_MODEL', 'GigaChat-2'),
                         'messages' => [
-                            ['role' => 'system', 'content' => $system],
+                            [self::FIELD_KEY_ROLE => 'system', 'content' => $system],
                             ['role' => 'user', 'content' => $input],
                         ],
                         'temperature' => 0.1,
