@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Parser
 {
+    private const FIELD_KEY_TITLE = 'title';
+
     public static function local(string $text, \DateTimeImmutable $now): array
     {
         if (mb_strlen($text) > 200) {
@@ -77,7 +79,7 @@ final class Parser
                 continue;
             }
             $out[] = [
-                'title' => $title,
+                self::FIELD_KEY_TITLE => $title,
                 'subject' => null,
                 'deadline' => $deadline,
                 'estimated_minutes' => $minutes,
