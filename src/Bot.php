@@ -688,7 +688,7 @@ final class Bot
                 Emojis::inline([
                     [[
                         $this->l('Переключиться на английский (English)', 'Switch to Russian (Русский)'),
-                        'onboard:' . $this->s['token'] . ':language',
+                        'onboard:' . $this->s[self::FIELD_KEY_TOKEN] . ':language',
                     ]],
                     [[$this->l('ОК', 'OK'), 'onboard:' . $this->s['token'] . ':continue']],
                 ]),
