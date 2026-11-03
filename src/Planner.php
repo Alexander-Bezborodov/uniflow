@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Planner
 {
+    private const FIELD_KEY_DURATION_VISIBLE = 'duration_visible';
+
     private const FIELD_KEY_SUBJECT = 'subject';
 
     private const FIELD_KEY_ID = 'id';
@@ -76,7 +78,7 @@ final class Planner
             $subject .
             "\n📅 " .
             (isset($t['deadline']) ? Dates::label($t['deadline'], $now) : ($language === 'en' ? 'Specify a deadline' : 'Уточни дедлайн')) .
-            (!isset($t['duration_visible']) || !empty($t['duration_visible'])
+            (!isset($t[self::FIELD_KEY_DURATION_VISIBLE]) || !empty($t['duration_visible'])
                 ? "\n⏱ " . ($t['estimated_minutes'] ?? '?') . ($language === 'en' ? ' min for the task' : ' мин на задачу')
                 : '') .
             (!empty($t['importance_visible'])
