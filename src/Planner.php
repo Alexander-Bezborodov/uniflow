@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Planner
 {
+    private const FIELD_KEY_ID = 'id';
+
     private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
 
     public static function priority(array $t, \DateTimeImmutable $now): int
@@ -40,7 +42,7 @@ final class Planner
                 strtotime($a['deadline']),
                 -(int) $a['importance'],
                 -(int) $a['estimated_minutes'],
-                (int) $a['id'],
+                (int) $a[self::FIELD_KEY_ID],
             ] <=> [
                 -self::priority($b, $now),
                 strtotime($b['deadline']),
