@@ -690,7 +690,7 @@ final class Bot
                         $this->l('Переключиться на английский (English)', 'Switch to Russian (Русский)'),
                         'onboard:' . $this->s[self::FIELD_KEY_TOKEN] . ':language',
                     ]],
-                    [[$this->l('ОК', 'OK'), 'onboard:' . $this->s['token'] . ':continue']],
+                    [[$this->l('ОК', 'OK'), 'onboard:' . $this->s[self::FIELD_KEY_TOKEN] . ':continue']],
                 ]),
             );
         } elseif ($action === 'cancel') {
