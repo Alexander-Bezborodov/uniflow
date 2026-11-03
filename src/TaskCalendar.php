@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class TaskCalendar
 {
+    private const FIELD_KEY_CLOCK = 'clock';
+
     public static function prepare(Config $config, Database $db, Telegram $telegram, int $user, string $month): string
     {
         if (!extension_loaded('gd') || !function_exists('imagettftext')) {
@@ -123,7 +125,7 @@ final class TaskCalendar
         foreach ($tasks as $task) {
             $date = (new \DateTimeImmutable($task['deadline']))->setTimezone($now->getTimezone());
             if ($date->format('Y-m') === $month) {
-                $task['clock'] = $date->format('H:i');
+                $task[self::FIELD_KEY_CLOCK] = $date->format('H:i');
                 $grouped[(int) $date->format('j')][] = $task;
             }
         }
