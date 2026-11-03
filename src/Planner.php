@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Planner
 {
+    private const FIELD_KEY_SUBJECT = 'subject';
+
     private const FIELD_KEY_ID = 'id';
 
     private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
@@ -63,7 +65,7 @@ final class Planner
         $priority = $language === 'en'
             ? ['', '🟢 Low', '🟡 Medium', '🔴 High']
             : ['', '🟢 Низкий', '🟡 Средний', '🔴 Высокий'];
-        $subject = isset($t['subject']) && trim((string) $t['subject']) !== ''
+        $subject = isset($t[self::FIELD_KEY_SUBJECT]) && trim((string) $t['subject']) !== ''
             ? "\n" .
                 ($language === 'en' ? 'Subject: ' : 'Предмет: ') .
                 Emojis::escape($t['subject'])
