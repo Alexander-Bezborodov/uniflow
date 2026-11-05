@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_MESSAGE_ID = 'message_id';
+
     private const FIELD_KEY_RESULT = 'result';
 
     private const FIELD_KEY_OK = 'ok';
@@ -44,7 +46,7 @@ final class Worker
                     $result = $this->telegram->request($thinking['method'], $thinking['payload']);
                     if (!empty($result[self::FIELD_KEY_OK])) {
                         $thinkingMessageId = $thinking['method'] === 'sendMessage'
-                            ? ($result[self::FIELD_KEY_RESULT]['message_id'] ?? null)
+                            ? ($result[self::FIELD_KEY_RESULT][self::FIELD_KEY_MESSAGE_ID] ?? null)
                             : ($thinking['payload']['message_id'] ?? null);
                     }
                 } catch (\Throwable $e) {
