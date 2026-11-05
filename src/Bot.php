@@ -696,7 +696,7 @@ final class Bot
         } elseif ($action === 'cancel') {
             $this->say($this->l('Ввод отменён.', 'Input cancelled.'), $this->menu());
         } elseif ($action === 'help') {
-            $this->s = ['step' => 'help', 'token' => $this->token()];
+            $this->s = ['step' => 'help', self::FIELD_KEY_TOKEN => $this->token()];
             $this->help('menu');
         } elseif ($action === 'add') {
             $this->db->run('UPDATE users SET ai_consent=1 WHERE telegram_id=?', [$this->user]);
