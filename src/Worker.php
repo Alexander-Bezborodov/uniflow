@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_KEYBOARD = 'keyboard';
+
     private const FIELD_KEY_REPLY_MARKUP = 'reply_markup';
 
     private const FIELD_KEY_MESSAGE_ID = 'message_id';
@@ -57,7 +59,7 @@ final class Worker
             $prepared = $this->bot->prepare($u);
             if (is_int($thinkingMessageId)) {
                 $prepared['_thinking_message_id'] = $thinkingMessageId;
-                $prepared['_thinking_has_keyboard'] = isset($thinking['payload'][self::FIELD_KEY_REPLY_MARKUP]['keyboard']);
+                $prepared['_thinking_has_keyboard'] = isset($thinking['payload'][self::FIELD_KEY_REPLY_MARKUP][self::FIELD_KEY_KEYBOARD]);
             }
             $this->db->transaction(function () use ($u, $r, $prepared): void {
                 $this->bot->handle($u, $prepared);
