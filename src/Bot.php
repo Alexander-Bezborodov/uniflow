@@ -727,7 +727,7 @@ final class Bot
         } elseif ($action === 'ai') {
             $this->navigate('add');
         } elseif ($action === 'explain') {
-            $this->s = ['step' => 'ai_choice', 'action' => $action, 'token' => $this->token()];
+            $this->s = ['step' => 'ai_choice', 'action' => $action, self::FIELD_KEY_TOKEN => $this->token()];
             $rows = [];
             $rows[] = [['✨ Объяснить', 'ai:' . $this->s['token'] . ':provider']];
             $this->say(
