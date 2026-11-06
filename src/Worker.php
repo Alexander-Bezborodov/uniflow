@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_LANGUAGE = 'language';
+
     private const FIELD_KEY_ATTEMPTS = 'attempts';
 
     private const FIELD_KEY_TEXT = 'text';
@@ -138,7 +140,7 @@ final class Worker
             ->fetchAll();
         $this->db->transaction(function () use ($overdue, $tasks, $now): void {
             foreach ($overdue as $t) {
-                $english = ($t['language'] ?? 'ru') === 'en';
+                $english = ($t[self::FIELD_KEY_LANGUAGE] ?? 'ru') === 'en';
                 $payload = [
                     'chat_id' => (int) $t['user_id'],
                     'text' => Emojis::render(
