@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_ID = 'id';
+
     private const FIELD_KEY_KEYBOARD = 'keyboard';
 
     private const FIELD_KEY_REPLY_MARKUP = 'reply_markup';
@@ -65,7 +67,7 @@ final class Worker
                 $this->bot->handle($u, $prepared);
                 $this->db->run("UPDATE updates SET processed_at=?,payload='{}' WHERE id=?", [
                     time(),
-                    $r['id'],
+                    $r[self::FIELD_KEY_ID],
                 ]);
             });
         } catch (\Throwable $e) {
