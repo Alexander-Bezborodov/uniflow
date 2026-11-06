@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_ATTEMPTS = 'attempts';
+
     private const FIELD_KEY_TEXT = 'text';
 
     private const FIELD_KEY_CHAT_ID = 'chat_id';
@@ -92,7 +94,7 @@ final class Worker
                 } catch (\Throwable $ignored) {
                 }
             }
-            $attempt = (int) $r['attempts'] + 1;
+            $attempt = (int) $r[self::FIELD_KEY_ATTEMPTS] + 1;
             if ($attempt >= 5) {
                 $this->db->transaction(function () use ($r, $u): void {
                     $from = Bot::identity($u ?? []);
