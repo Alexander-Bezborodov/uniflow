@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_TEXT = 'text';
+
     private const FIELD_KEY_CHAT_ID = 'chat_id';
 
     private const FIELD_KEY_ID = 'id';
@@ -79,7 +81,7 @@ final class Worker
                 try {
                     $errorPayload = [
                         self::FIELD_KEY_CHAT_ID => $from['id'],
-                        'text' => 'Не удалось получить ответ GigaChat. Попробуйте отправить задачу ещё раз.',
+                        self::FIELD_KEY_TEXT => 'Не удалось получить ответ GigaChat. Попробуйте отправить задачу ещё раз.',
                     ];
                     $method = 'sendMessage';
                     if (!isset($thinking['payload']['reply_markup']['keyboard'])) {
