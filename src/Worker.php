@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_USER_ID = 'user_id';
+
     private const FIELD_KEY_LANGUAGE = 'language';
 
     private const FIELD_KEY_ATTEMPTS = 'attempts';
@@ -142,7 +144,7 @@ final class Worker
             foreach ($overdue as $t) {
                 $english = ($t[self::FIELD_KEY_LANGUAGE] ?? 'ru') === 'en';
                 $payload = [
-                    'chat_id' => (int) $t['user_id'],
+                    'chat_id' => (int) $t[self::FIELD_KEY_USER_ID],
                     'text' => Emojis::render(
                         ($english ? '⚠ <b>You missed a task deadline</b>' : '⚠ <b>Вы просрочили задачу</b>') .
                             "\n" .
