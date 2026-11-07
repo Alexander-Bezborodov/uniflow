@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_DEADLINE = 'deadline';
+
     private const FIELD_KEY_TITLE = 'title';
 
     private const FIELD_KEY_USER_ID = 'user_id';
@@ -152,7 +154,7 @@ final class Worker
                             "\n" .
                             Emojis::escape($t[self::FIELD_KEY_TITLE]) .
                             "\n📅 " .
-                            Dates::label($t['deadline'], $now),
+                            Dates::label($t[self::FIELD_KEY_DEADLINE], $now),
                     ),
                     'parse_mode' => 'HTML',
                     'reply_markup' => Emojis::inline([[
