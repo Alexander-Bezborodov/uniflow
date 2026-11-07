@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_TITLE = 'title';
+
     private const FIELD_KEY_USER_ID = 'user_id';
 
     private const FIELD_KEY_LANGUAGE = 'language';
@@ -148,7 +150,7 @@ final class Worker
                     'text' => Emojis::render(
                         ($english ? '⚠ <b>You missed a task deadline</b>' : '⚠ <b>Вы просрочили задачу</b>') .
                             "\n" .
-                            Emojis::escape($t['title']) .
+                            Emojis::escape($t[self::FIELD_KEY_TITLE]) .
                             "\n📅 " .
                             Dates::label($t['deadline'], $now),
                     ),
