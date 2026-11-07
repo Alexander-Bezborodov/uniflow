@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_DRAFTS = 'drafts';
+
     private const FIELD_KEY_TOKEN = 'token';
 
     private const FIELD_KEY_VOLUME = 'volume';
@@ -135,7 +137,7 @@ final class Bot
         $this->db->setCache('ai_rate_' . $from['id'], (string) time());
         try {
             if ($parse) {
-                return ['drafts' => Parser::ai($this->ai, $text, $now), 'source' => 'GigaChat'];
+                return [self::FIELD_KEY_DRAFTS => Parser::ai($this->ai, $text, $now), 'source' => 'GigaChat'];
             }
             $plan = array_slice(Planner::plan($this->db->tasks($from['id']), $now), 0, 3);
             if (!$plan) {
