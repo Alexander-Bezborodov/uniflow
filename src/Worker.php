@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_PARSE_MODE = 'parse_mode';
+
     private const FIELD_KEY_DEADLINE = 'deadline';
 
     private const FIELD_KEY_TITLE = 'title';
@@ -156,7 +158,7 @@ final class Worker
                             "\n📅 " .
                             Dates::label($t[self::FIELD_KEY_DEADLINE], $now),
                     ),
-                    'parse_mode' => 'HTML',
+                    self::FIELD_KEY_PARSE_MODE => 'HTML',
                     'reply_markup' => Emojis::inline([[
                         [$english ? 'Reschedule' : 'Перенести', 'task:reschedule:' . $t['id']],
                         [$english ? '✅ Complete' : '✅ Выполнено', 'task:done:' . $t['id']],
