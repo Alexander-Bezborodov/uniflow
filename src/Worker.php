@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_REMINDER_3H_SENT = 'reminder_3h_sent';
+
     private const FIELD_KEY_HOURS = 'hours';
 
     private const FIELD_KEY_REVISION = 'revision';
@@ -177,7 +179,7 @@ final class Worker
             foreach ($tasks as $t) {
                 $seconds = strtotime($t['deadline']) - $now->getTimestamp();
                 $hours = null;
-                if ($seconds <= 7200 && !$t['reminder_3h_sent']) {
+                if ($seconds <= 7200 && !$t[self::FIELD_KEY_REMINDER_3H_SENT]) {
                     $hours = 2;
                 } elseif (
                     $seconds > 7200 &&
