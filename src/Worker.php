@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_REVISION = 'revision';
+
     private const FIELD_KEY_PARSE_MODE = 'parse_mode';
 
     private const FIELD_KEY_DEADLINE = 'deadline';
@@ -166,7 +168,7 @@ final class Worker
                 ];
                 $this->db->out('sendMessage', $payload, [
                     'id' => (int) $t['id'],
-                    'revision' => (int) $t['revision'],
+                    self::FIELD_KEY_REVISION => (int) $t['revision'],
                     'hours' => 0,
                 ]);
             }
