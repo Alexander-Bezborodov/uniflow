@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
+
     private const FIELD_KEY_REMINDER_3H_SENT = 'reminder_3h_sent';
 
     private const FIELD_KEY_HOURS = 'hours';
@@ -183,7 +185,7 @@ final class Worker
                     $hours = 2;
                 } elseif (
                     $seconds > 7200 &&
-                    !empty($t['importance_visible']) &&
+                    !empty($t[self::FIELD_KEY_IMPORTANCE_VISIBLE]) &&
                     (int) $t['importance'] === 3 &&
                     $seconds <= 43200 &&
                     !$t['reminder_24h_sent']
