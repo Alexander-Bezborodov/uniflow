@@ -731,7 +731,7 @@ final class Bot
         } elseif ($action === 'explain') {
             $this->s = ['step' => 'ai_choice', 'action' => $action, self::FIELD_KEY_TOKEN => $this->token()];
             $rows = [];
-            $rows[] = [['✨ Объяснить', 'ai:' . $this->s['token'] . ':provider']];
+            $rows[] = [['✨ Объяснить', 'ai:' . $this->s[self::FIELD_KEY_TOKEN] . ':provider']];
             $this->say(
                 $this->l('GigaChat объяснит, с чего лучше начать.', 'GigaChat will explain where to start.'),
                 Emojis::inline($rows),
