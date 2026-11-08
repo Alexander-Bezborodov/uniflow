@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_HOURS = 'hours';
+
     private const FIELD_KEY_REVISION = 'revision';
 
     private const FIELD_KEY_PARSE_MODE = 'parse_mode';
@@ -169,7 +171,7 @@ final class Worker
                 $this->db->out('sendMessage', $payload, [
                     'id' => (int) $t['id'],
                     self::FIELD_KEY_REVISION => (int) $t['revision'],
-                    'hours' => 0,
+                    self::FIELD_KEY_HOURS => 0,
                 ]);
             }
             foreach ($tasks as $t) {
