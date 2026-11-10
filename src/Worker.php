@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_ERROR_CODE = 'error_code';
+
     private const FIELD_KEY_RICH_MESSAGE = 'rich_message';
 
     private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
@@ -328,7 +330,7 @@ final class Worker
         try {
             $result = $this->telegram->request($r['method'], $p);
         } catch (\Throwable $e) {
-            $result = ['ok' => false, 'error_code' => 503];
+            $result = ['ok' => false, self::FIELD_KEY_ERROR_CODE => 503];
         }
         if (!empty($result['ok'])) {
             $this->db->transaction(function () use ($r): void {
