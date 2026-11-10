@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+if (!defined('APP_BIN_CONSOLE_PHP_FIELD_KEY_SCHEME')) { define('APP_BIN_CONSOLE_PHP_FIELD_KEY_SCHEME', 'scheme'); }
+
 
 require dirname(__DIR__) . '/src/bootstrap.php';
 if (PHP_SAPI !== 'cli') {
@@ -19,7 +21,7 @@ try {
     } elseif ($command === 'webhook:set') {
         $url = $config->get('WEBHOOK_URL');
         $parts = parse_url($url);
-        if (!$parts || ($parts['scheme'] ?? '') !== 'https' || empty($parts['host']) || isset($parts['user']) || isset($parts['pass']) || isset($parts['fragment'])) {
+        if (!$parts || ($parts[\APP_BIN_CONSOLE_PHP_FIELD_KEY_SCHEME] ?? '') !== 'https' || empty($parts['host']) || isset($parts['user']) || isset($parts['pass']) || isset($parts['fragment'])) {
             throw new RuntimeException('Set HTTPS WEBHOOK_URL');
         }
         $telegram = new UniFlow\Telegram($config);
