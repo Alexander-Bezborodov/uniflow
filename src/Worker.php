@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_DESCRIPTION = 'description';
+
     private const FIELD_KEY_ERROR_CODE = 'error_code';
 
     private const FIELD_KEY_RICH_MESSAGE = 'rich_message';
@@ -357,7 +359,7 @@ final class Worker
                     $r['id'],
                 ]);
             } elseif ($code === 400 && $r['method'] === 'editMessageText' &&
-                stripos($result['description'] ?? '', 'message is not modified') !== false) {
+                stripos($result[self::FIELD_KEY_DESCRIPTION] ?? '', 'message is not modified') !== false) {
                 $this->discard($r);
             } elseif ($code === 400 && $r['method'] === 'editMessageText' &&
                 preg_match("~message (?:can.t be edited|to edit not found)~i", $result['description'] ?? '')) {
