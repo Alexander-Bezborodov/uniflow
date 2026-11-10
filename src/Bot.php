@@ -839,7 +839,7 @@ final class Bot
                 return;
             }
             $this->s['step'] = 'edit_confirm';
-            $this->s['token'] = $this->token();
+            $this->s[self::FIELD_KEY_TOKEN] = $this->token();
             $this->say(
                 Planner::card($this->s['drafts'][0], $this->now, $this->language) . "\n\n" . $this->l('Сохранить?', 'Save changes?'),
                 Emojis::inline([
