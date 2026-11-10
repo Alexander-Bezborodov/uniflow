@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_CAPTION = 'caption';
+
     private const FIELD_KEY_DESCRIPTION = 'description';
 
     private const FIELD_KEY_ERROR_CODE = 'error_code';
@@ -371,7 +373,7 @@ final class Worker
             } elseif (
                 $code === 400 &&
                 $r['method'] === 'sendPhoto' &&
-                isset($p['chat_id'], $p['caption'])
+                isset($p['chat_id'], $p[self::FIELD_KEY_CAPTION])
             ) {
                 $fallback = [
                     'chat_id' => $p['chat_id'],
