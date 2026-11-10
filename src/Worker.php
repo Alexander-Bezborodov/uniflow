@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_RICH_MESSAGE = 'rich_message';
+
     private const FIELD_KEY_IMPORTANCE_VISIBLE = 'importance_visible';
 
     private const FIELD_KEY_REMINDER_3H_SENT = 'reminder_3h_sent';
@@ -295,7 +297,7 @@ final class Worker
             }
             try {
                 $photo = TaskCalendar::prepare($this->config, $this->db, $this->telegram, (int) $p['chat_id'], $p['month']);
-                $p['rich_message'] = ['html' => '<img src="' . htmlspecialchars($photo, ENT_QUOTES, 'UTF-8') . '"><p>' . nl2br($p['text'] ?? '', false) . '</p>'];
+                $p[self::FIELD_KEY_RICH_MESSAGE] = ['html' => '<img src="' . htmlspecialchars($photo, ENT_QUOTES, 'UTF-8') . '"><p>' . nl2br($p['text'] ?? '', false) . '</p>'];
                 unset($p['month'], $p['text']);
                 $method = isset($p['message_id']) ? 'editMessageText' : 'sendRichMessage';
             } catch (\Throwable $e) {
