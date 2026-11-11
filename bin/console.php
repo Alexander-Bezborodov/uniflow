@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+if (!defined('APP_BIN_CONSOLE_PHP_FIELD_KEY_OK')) { define('APP_BIN_CONSOLE_PHP_FIELD_KEY_OK', 'ok'); }
+
 if (!defined('APP_BIN_CONSOLE_PHP_FIELD_KEY_URL')) { define('APP_BIN_CONSOLE_PHP_FIELD_KEY_URL', 'url'); }
 
 if (!defined('APP_BIN_CONSOLE_PHP_FIELD_KEY_HOST')) { define('APP_BIN_CONSOLE_PHP_FIELD_KEY_HOST', 'host'); }
@@ -31,7 +33,7 @@ try {
         $telegram = new UniFlow\Telegram($config);
         $relayWebhookUrl = $telegram->createIncomingWebhookUrl($url);
         $result = $telegram->request('setWebhook', [\APP_BIN_CONSOLE_PHP_FIELD_KEY_URL => $relayWebhookUrl,'secret_token' => $config->get('WEBHOOK_SECRET'),'allowed_updates' => ['message','callback_query'],'max_connections' => 1,'drop_pending_updates' => false]);
-        if (empty($result['ok'])) {
+        if (empty($result[\APP_BIN_CONSOLE_PHP_FIELD_KEY_OK])) {
             throw new RuntimeException('setWebhook failed');
         } echo "Webhook registered\n";
     } elseif ($command === 'webhook:info') {
