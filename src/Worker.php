@@ -103,7 +103,7 @@ final class Worker
                 ]);
             });
         } catch (\Throwable $e) {
-            error_log('Update failed #' . $r['id'] . ': ' . get_class($e));
+            error_log('Update failed #' . $r[self::FIELD_KEY_ID] . ': ' . get_class($e));
             $from = Bot::identity($u ?? []);
             if ($from && is_int($thinkingMessageId)) {
                 try {
