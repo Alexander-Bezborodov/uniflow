@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
+
     private const FIELD_KEY_DEADLINE = 'deadline';
 
     private const FIELD_KEY_DRAFTS = 'drafts';
@@ -79,7 +81,7 @@ final class Bot
         'title' => 'Название',
         'subject' => 'Предмет',
         self::FIELD_KEY_DEADLINE => 'Дедлайн',
-        'estimated_minutes' => 'Длительность',
+        self::FIELD_KEY_ESTIMATED_MINUTES => 'Длительность',
     ];
 
     public function __construct(Database $db, Config $config, ?GigaChat $ai = null)
