@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_DEADLINE = 'deadline';
+
     private const FIELD_KEY_DRAFTS = 'drafts';
 
     private const FIELD_KEY_TOKEN = 'token';
@@ -76,7 +78,7 @@ final class Bot
     private const LABELS = [
         'title' => 'Название',
         'subject' => 'Предмет',
-        'deadline' => 'Дедлайн',
+        self::FIELD_KEY_DEADLINE => 'Дедлайн',
         'estimated_minutes' => 'Длительность',
     ];
 
