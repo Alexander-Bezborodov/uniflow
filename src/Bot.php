@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_FROM = 'from';
+
     private const FIELD_KEY_CALLBACK_QUERY = 'callback_query';
 
     private const FIELD_KEY_MESSAGE = 'message';
@@ -98,7 +100,7 @@ final class Bot
     public static function identity(array $u): ?array
     {
         $m = $u[self::FIELD_KEY_MESSAGE] ?? ($u[self::FIELD_KEY_CALLBACK_QUERY]['message'] ?? null);
-        $from = $u['callback_query']['from'] ?? ($m['from'] ?? null);
+        $from = $u['callback_query'][self::FIELD_KEY_FROM] ?? ($m['from'] ?? null);
         if (
             !is_array($m) ||
             !is_array($from) ||
