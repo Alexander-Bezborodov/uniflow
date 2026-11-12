@@ -108,7 +108,7 @@ final class Worker
             if ($from && is_int($thinkingMessageId)) {
                 try {
                     $errorPayload = [
-                        self::FIELD_KEY_CHAT_ID => $from['id'],
+                        self::FIELD_KEY_CHAT_ID => $from[self::FIELD_KEY_ID],
                         self::FIELD_KEY_TEXT => 'Не удалось получить ответ GigaChat. Попробуйте отправить задачу ещё раз.',
                     ];
                     $method = 'sendMessage';
