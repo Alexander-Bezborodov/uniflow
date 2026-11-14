@@ -1812,7 +1812,7 @@ final class Bot
             ];
         foreach (array_slice($plan, 0, 3) as $i => $t) {
             $allowed = Planner::reasons($t, $this->now);
-            $reason = $prepared['steps'][$i]['reason'] ?? $allowed[0];
+            $reason = $prepared['steps'][$i][self::FIELD_KEY_REASON] ?? $allowed[0];
             if (!in_array($reason, $allowed, true)) {
                 $reason = $allowed[0];
             }
