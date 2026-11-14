@@ -126,7 +126,7 @@ final class Worker
                     $from = Bot::identity($u ?? []);
                     if ($from) {
                         $this->db->send(
-                            $from['id'],
+                            $from[self::FIELD_KEY_ID],
                             'Не удалось обработать действие. Попробуй /cancel и начни заново.',
                         );
                     }
