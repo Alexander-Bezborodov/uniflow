@@ -178,7 +178,7 @@ final class Bot
             );
             if (
                 !isset($result[self::FIELD_KEY_STEPS]) ||
-                !is_array($result['steps']) ||
+                !is_array($result[self::FIELD_KEY_STEPS]) ||
                 count($result['steps']) !== count($facts)
             ) {
                 throw new \RuntimeException('invalid_reasons');
