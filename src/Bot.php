@@ -227,7 +227,7 @@ final class Bot
         }
         $state = $this->db->state($from['id']);
         $user = $this->db->one('SELECT ai_consent,language FROM users WHERE telegram_id=?', [$from['id']]);
-        $language = ($user['language'] ?? 'ru') === 'en' ? 'en' : 'ru';
+        $language = ($user[self::FIELD_KEY_LANGUAGE] ?? 'ru') === 'en' ? 'en' : 'ru';
         $text = $u['message']['text'] ?? '';
         $callback = $u['callback_query']['data'] ?? '';
         if ($this->shouldParseWithAi($state, $user, $text)) {
