@@ -938,7 +938,7 @@ final class Bot
             $this->askPriority();
             return;
         }
-        if (!empty($this->s['auto_save']) && count($this->s['drafts']) === 1) {
+        if (!empty($this->s[self::FIELD_KEY_AUTO_SAVE]) && count($this->s['drafts']) === 1) {
             $draft = $this->s['drafts'][0];
             Dates::validate($draft, $this->now);
             $this->db->create($this->user, $draft, $this->now);
