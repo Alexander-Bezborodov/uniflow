@@ -132,7 +132,7 @@ final class Worker
                     }
                     $this->db->run(
                         "UPDATE updates SET attempts=5,processed_at=?,payload='{}' WHERE id=?",
-                        [time(), $r['id']],
+                        [time(), $r[self::FIELD_KEY_ID]],
                     );
                 });
             } else {
