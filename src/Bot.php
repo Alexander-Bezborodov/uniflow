@@ -621,7 +621,7 @@ final class Bot
             return;
         }
         if (!isset($prepared['drafts'])) {
-            $this->s = ['step' => 'ai_input', 'provider' => true];
+            $this->s = ['step' => 'ai_input', self::FIELD_KEY_PROVIDER => true];
             $this->say($this->l(
                 'GigaChat не смог обработать задание. Попробуй отправить его ещё раз или нажми «Отменить».',
                 'GigaChat could not process the task. Send it again or tap Cancel.',
