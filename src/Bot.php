@@ -373,7 +373,7 @@ final class Bot
                 'parse_mode' => 'HTML',
             ];
             if ($keyboard !== null && isset($keyboard[self::FIELD_KEY_INLINE_KEYBOARD])) {
-                $payload['reply_markup'] = $keyboard;
+                $payload[self::FIELD_KEY_REPLY_MARKUP] = $keyboard;
             }
             $this->db->out('editMessageText', $payload);
             $this->editMessageId = null;
