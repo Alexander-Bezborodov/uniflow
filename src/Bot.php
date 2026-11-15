@@ -257,7 +257,7 @@ final class Bot
                 'method' => 'editMessageText',
                 self::FIELD_KEY_PAYLOAD => [
                     'chat_id' => $from['id'],
-                    'message_id' => $u['callback_query']['message']['message_id'],
+                    self::FIELD_KEY_MESSAGE_ID => $u['callback_query']['message']['message_id'],
                     'text' => Emojis::render(
                         $language === 'en'
                             ? '⏳ GigaChat is preparing an explanation...'
