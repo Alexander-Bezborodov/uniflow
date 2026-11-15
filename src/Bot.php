@@ -345,7 +345,7 @@ final class Bot
                 $this->editMessageId = $q['message']['message_id'];
                 $this->editHasPhoto = !empty($q['message']['photo']);
             }
-            $this->db->out('answerCallbackQuery', ['callback_query_id' => $q['id']]);
+            $this->db->out('answerCallbackQuery', [self::FIELD_KEY_CALLBACK_QUERY_ID => $q['id']]);
             $this->callback((string) ($q['data'] ?? ''), $prepared);
         } else {
             $text = $u['message']['text'] ?? null;
