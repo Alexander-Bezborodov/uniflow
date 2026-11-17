@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_REMINDERS_DISABLED = 'reminders_disabled';
+
     private const FIELD_KEY_TASKS = 'tasks';
 
     private const FIELD_KEY_MONTH = 'month';
@@ -1732,7 +1734,7 @@ final class Bot
             ]],
             [
                 [
-                    $u['reminders_disabled']
+                    $u[self::FIELD_KEY_REMINDERS_DISABLED]
                         ? $this->l('Включить напоминания', 'Turn reminders on')
                         : $this->l('Выключить напоминания', 'Turn reminders off'),
                     'settings:' . $this->s['token'] . ':reminders',
