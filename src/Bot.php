@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_MONTH = 'month';
+
     private const FIELD_KEY_DATA = 'data';
 
     private const FIELD_KEY_TEXT = 'text';
@@ -1529,7 +1531,7 @@ final class Bot
             if ($mode === 'tasks' && $imagesEnabled) {
                 $payload = [
                     'chat_id' => $this->user,
-                    'month' => $this->now->format('Y-m'),
+                    self::FIELD_KEY_MONTH => $this->now->format('Y-m'),
                     'text' => $mode === 'today'
                         ? $this->l('На сегодня задач нет.', 'No tasks for today.')
                         : $this->l('Активных задач нет. Добавить: /add.', 'No active tasks. Add one: /add.'),
