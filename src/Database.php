@@ -87,7 +87,7 @@ final class Database
         $settings = [
             self::FIELD_KEY_HOST => $config->get('DB_HOST'),
             self::FIELD_KEY_PORT => $config->get('DB_PORT', '3306'),
-            'name' => $config->get('DB_NAME'),
+            self::FIELD_KEY_NAME => $config->get('DB_NAME'),
             'user' => $config->get('DB_USER'),
             'pass' => $config->get('DB_PASS'),
         ];
