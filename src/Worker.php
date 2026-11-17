@@ -139,7 +139,7 @@ final class Worker
                 $this->db->run('UPDATE updates SET attempts=?,available_at=? WHERE id=?', [
                     $attempt,
                     time() + min(60, 2 ** $attempt),
-                    $r['id'],
+                    $r[self::FIELD_KEY_ID],
                 ]);
             }
         }
