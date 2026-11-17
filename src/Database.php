@@ -85,7 +85,7 @@ final class Database
     private static function settings(Config $config): array
     {
         $settings = [
-            'host' => $config->get('DB_HOST'),
+            self::FIELD_KEY_HOST => $config->get('DB_HOST'),
             'port' => $config->get('DB_PORT', '3306'),
             'name' => $config->get('DB_NAME'),
             'user' => $config->get('DB_USER'),
