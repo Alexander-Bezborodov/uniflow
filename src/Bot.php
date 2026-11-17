@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_TASKS = 'tasks';
+
     private const FIELD_KEY_MONTH = 'month';
 
     private const FIELD_KEY_DATA = 'data';
@@ -1694,7 +1696,7 @@ final class Bot
         }
         $texts = $this->language === 'en' ? [
             'add' => "➕ <b>Adding a task</b>\nTap " . '"Add task"' . ' and send the task in one message. One task is saved immediately; multiple tasks can be reviewed before saving.',
-            'tasks' => "📚 <b>Working with tasks</b>\nOpen " . '"All tasks"' . ' and select a task to complete, edit, or delete it.',
+            self::FIELD_KEY_TASKS => "📚 <b>Working with tasks</b>\nOpen " . '"All tasks"' . ' and select a task to complete, edit, or delete it.',
             'reminders' => "⏰ <b>Reminders</b>\nThe bot reminds you as the deadline approaches. You can turn reminders off in settings.",
             'gigachat' => "✨ <b>GigaChat</b>\nGigaChat finds tasks in your text, improves their names, and helps you decide where to start.",
         ] : [
