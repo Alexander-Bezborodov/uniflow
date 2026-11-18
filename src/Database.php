@@ -88,7 +88,7 @@ final class Database
             self::FIELD_KEY_HOST => $config->get('DB_HOST'),
             self::FIELD_KEY_PORT => $config->get('DB_PORT', '3306'),
             self::FIELD_KEY_NAME => $config->get('DB_NAME'),
-            'user' => $config->get('DB_USER'),
+            self::FIELD_KEY_USER => $config->get('DB_USER'),
             'pass' => $config->get('DB_PASS'),
         ];
         if ($settings['host'] === '' || preg_match('/[\r\n;]/', $settings['host'])) {
