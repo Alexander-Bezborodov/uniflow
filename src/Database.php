@@ -620,7 +620,7 @@ final class Database
                 $draft['estimated_minutes'],
                 (int) ($draft['duration_visible'] ?? 1),
                 $draft['importance'],
-                (int) ($draft['importance_visible'] ?? 0),
+                (int) ($draft[self::FIELD_KEY_IMPORTANCE_VISIBLE] ?? 0),
                 Dates::utc($now),
                 (int) $demo,
             ],
