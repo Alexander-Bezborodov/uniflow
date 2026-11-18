@@ -416,7 +416,7 @@ final class Database
                         (int) ($task['importance'] ?? 2),
                         (int) ($task[self::FIELD_KEY_IMPORTANCE_VISIBLE] ?? 0),
                         $task['status'] ?? 'active',
-                        $task['created_at'],
+                        $task[self::FIELD_KEY_CREATED_AT],
                         $task['completed_at'] ?? null,
                         (int) ($task['reminder_24h_sent'] ?? 0),
                         (int) ($task['reminder_3h_sent'] ?? 0),
