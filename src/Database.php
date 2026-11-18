@@ -89,7 +89,7 @@ final class Database
             self::FIELD_KEY_PORT => $config->get('DB_PORT', '3306'),
             self::FIELD_KEY_NAME => $config->get('DB_NAME'),
             self::FIELD_KEY_USER => $config->get('DB_USER'),
-            'pass' => $config->get('DB_PASS'),
+            self::FIELD_KEY_PASS => $config->get('DB_PASS'),
         ];
         if ($settings['host'] === '' || preg_match('/[\r\n;]/', $settings['host'])) {
             throw new \RuntimeException('Set DB_HOST in .env');
