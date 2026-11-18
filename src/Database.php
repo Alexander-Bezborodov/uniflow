@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Database
 {
+    private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
+
     private const FIELD_KEY_TITLE = 'title';
 
     private const FIELD_KEY_REPLY_MARKUP = 'reply_markup';
@@ -413,7 +415,7 @@ final class Database
                         $task[self::FIELD_KEY_TITLE],
                         $task['subject'] ?? null,
                         $task['deadline'],
-                        (int) ($task['estimated_minutes'] ?? 60),
+                        (int) ($task[self::FIELD_KEY_ESTIMATED_MINUTES] ?? 60),
                         (int) ($task['duration_visible'] ?? 1),
                         (int) ($task['importance'] ?? 2),
                         (int) ($task[self::FIELD_KEY_IMPORTANCE_VISIBLE] ?? 0),
