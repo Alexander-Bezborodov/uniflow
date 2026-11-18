@@ -626,7 +626,7 @@ final class Bot
             $this->say($this->l('Выбери действие кнопкой. /cancel - отмена.', 'Choose an action with a button. /cancel cancels.'));
             return;
         }
-        if (!isset($prepared['drafts'])) {
+        if (!isset($prepared[self::FIELD_KEY_DRAFTS])) {
             $this->s = ['step' => 'ai_input', self::FIELD_KEY_PROVIDER => true];
             $this->say($this->l(
                 'GigaChat не смог обработать задание. Попробуй отправить его ещё раз или нажми «Отменить».',
