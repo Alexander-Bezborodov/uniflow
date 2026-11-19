@@ -498,7 +498,7 @@ final class Database
         unset($update['message'][self::FIELD_KEY_CHAT][self::FIELD_KEY_USERNAME]);
         unset($update[self::FIELD_KEY_CALLBACK_QUERY]['from']['username']);
         unset($update['callback_query']['message']['from']['username']);
-        unset($update['callback_query']['message']['chat']['username']);
+        unset($update['callback_query']['message'][self::FIELD_KEY_CHAT]['username']);
         $sql = $this->mysql
             ? 'INSERT IGNORE INTO updates(id,payload,received_at) VALUES(?,?,?)'
             : 'INSERT OR IGNORE INTO updates(id,payload,received_at) VALUES(?,?,?)';
