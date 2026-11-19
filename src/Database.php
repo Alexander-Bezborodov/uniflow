@@ -496,7 +496,7 @@ final class Database
     {
         unset($update['message']['from'][self::FIELD_KEY_USERNAME]);
         unset($update['message'][self::FIELD_KEY_CHAT]['username']);
-        unset($update['callback_query']['from']['username']);
+        unset($update[self::FIELD_KEY_CALLBACK_QUERY]['from']['username']);
         unset($update['callback_query']['message']['from']['username']);
         unset($update['callback_query']['message']['chat']['username']);
         $sql = $this->mysql
