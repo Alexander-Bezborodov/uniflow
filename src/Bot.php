@@ -864,7 +864,7 @@ final class Bot
                 Planner::card($this->s['drafts'][0], $this->now, $this->language) . "\n\n" . $this->l('Сохранить?', 'Save changes?'),
                 Emojis::inline([
                     [
-                        [$this->l('✅ Сохранить', '✅ Save'), 'editconfirm:' . $this->s['token'] . ':save'],
+                        [$this->l('✅ Сохранить', '✅ Save'), 'editconfirm:' . $this->s[self::FIELD_KEY_TOKEN] . ':save'],
                         [$this->l('Отмена', 'Cancel'), 'editconfirm:' . $this->s['token'] . ':cancel'],
                     ],
                 ]),
