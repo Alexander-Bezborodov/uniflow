@@ -544,7 +544,7 @@ final class Database
             'rich_message' => ['markdown' => $markdown],
         ];
         if ($keyboard !== null) {
-            $payload['reply_markup'] = $keyboard;
+            $payload[self::FIELD_KEY_REPLY_MARKUP] = $keyboard;
         }
         $this->out('sendRichMessage', $payload);
     }
