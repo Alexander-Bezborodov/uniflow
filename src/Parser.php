@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Parser
 {
+    private const FIELD_KEY_SUBJECT = 'subject';
+
     private const FIELD_KEY_TITLE = 'title';
 
     public static function local(string $text, \DateTimeImmutable $now): array
@@ -80,7 +82,7 @@ final class Parser
             }
             $out[] = [
                 self::FIELD_KEY_TITLE => $title,
-                'subject' => null,
+                self::FIELD_KEY_SUBJECT => null,
                 'deadline' => $deadline,
                 'estimated_minutes' => $minutes,
                 'importance' => 2,
