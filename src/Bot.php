@@ -865,7 +865,7 @@ final class Bot
                 Emojis::inline([
                     [
                         [$this->l('✅ Сохранить', '✅ Save'), 'editconfirm:' . $this->s[self::FIELD_KEY_TOKEN] . ':save'],
-                        [$this->l('Отмена', 'Cancel'), 'editconfirm:' . $this->s['token'] . ':cancel'],
+                        [$this->l('Отмена', 'Cancel'), 'editconfirm:' . $this->s[self::FIELD_KEY_TOKEN] . ':cancel'],
                     ],
                 ]),
             );
