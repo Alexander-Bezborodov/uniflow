@@ -85,7 +85,7 @@ final class Emojis
         $b = [self::FIELD_KEY_TEXT => self::normalize($label)];
         foreach (self::MAP as $emoji => $pair) {
             if (strpos($label, $emoji) === 0) {
-                $b['text'] = trim(str_replace("\u{FE0F}", '', substr($label, strlen($emoji))));
+                $b[self::FIELD_KEY_TEXT] = trim(str_replace("\u{FE0F}", '', substr($label, strlen($emoji))));
                 $b['icon_custom_emoji_id'] = $pair[0];
                 break;
             }
