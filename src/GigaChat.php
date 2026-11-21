@@ -144,7 +144,7 @@ final class GigaChat
                         'model' => $this->config->get('GIGACHAT_MODEL', 'GigaChat-2'),
                         'messages' => [
                             [self::FIELD_KEY_ROLE => 'system', self::FIELD_KEY_CONTENT => $system],
-                            ['role' => 'user', 'content' => $input],
+                            ['role' => 'user', self::FIELD_KEY_CONTENT => $input],
                         ],
                         'temperature' => 0.1,
                         'max_tokens' => 700,
