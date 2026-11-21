@@ -117,7 +117,7 @@ final class Parser
         foreach ($r['tasks'] as $index => $t) {
             if (
                 !is_array($t) ||
-                !isset($t['title']) ||
+                !isset($t[self::FIELD_KEY_TITLE]) ||
                 !is_string($t['title']) ||
                 trim($t['title']) === '' ||
                 mb_strlen($t['title']) > 200 ||
