@@ -163,7 +163,7 @@ final class GigaChat
             if ($r['status'] !== 200) {
                 throw new \RuntimeException('completion_error');
             }
-            $text = $r['data']['choices'][0]['message']['content'] ?? null;
+            $text = $r[self::FIELD_KEY_DATA]['choices'][0]['message']['content'] ?? null;
             if (!is_string($text) || strlen($text) > 30000) {
                 throw new \RuntimeException('invalid_completion');
             }
