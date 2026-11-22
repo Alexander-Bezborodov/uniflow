@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Planner
 {
+    private const FIELD_KEY_IMPORTANCE = 'importance';
+
     private const FIELD_KEY_DURATION_VISIBLE = 'duration_visible';
 
     private const FIELD_KEY_SUBJECT = 'subject';
@@ -23,7 +25,7 @@ final class Planner
         $base = $h <= 24 ? 4 : ($h <= 72 ? 3 : ($h <= 168 ? 2 : 1));
         return min(
             4,
-            $base + ((int) $t['importance'] === 3 || (int) $t[self::FIELD_KEY_ESTIMATED_MINUTES] >= 180 ? 1 : 0),
+            $base + ((int) $t[self::FIELD_KEY_IMPORTANCE] === 3 || (int) $t[self::FIELD_KEY_ESTIMATED_MINUTES] >= 180 ? 1 : 0),
         );
     }
 
