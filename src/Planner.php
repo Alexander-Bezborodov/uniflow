@@ -54,7 +54,7 @@ final class Planner
                 strtotime($b['deadline']),
                 -(int) $b['importance'],
                 -(int) $b['estimated_minutes'],
-                (int) $b['id'],
+                (int) $b[self::FIELD_KEY_ID],
             ];
         });
         foreach ($tasks as &$t) {
