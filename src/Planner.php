@@ -47,7 +47,7 @@ final class Planner
                 -self::priority($a, $now),
                 strtotime($a['deadline']),
                 -(int) $a['importance'],
-                -(int) $a['estimated_minutes'],
+                -(int) $a[self::FIELD_KEY_ESTIMATED_MINUTES],
                 (int) $a[self::FIELD_KEY_ID],
             ] <=> [
                 -self::priority($b, $now),
