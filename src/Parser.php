@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Parser
 {
+    private const FIELD_KEY_IMPORTANCE = 'importance';
+
     private const FIELD_KEY_ESTIMATED_MINUTES = 'estimated_minutes';
 
     private const FIELD_KEY_DEADLINE = 'deadline';
@@ -89,7 +91,7 @@ final class Parser
                 self::FIELD_KEY_SUBJECT => null,
                 self::FIELD_KEY_DEADLINE => $deadline,
                 self::FIELD_KEY_ESTIMATED_MINUTES => $minutes,
-                'importance' => 2,
+                self::FIELD_KEY_IMPORTANCE => 2,
             ];
         }
         return $out;
