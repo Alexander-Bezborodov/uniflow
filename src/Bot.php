@@ -634,7 +634,7 @@ final class Bot
             ));
             return;
         }
-        $drafts = $prepared['drafts'];
+        $drafts = $prepared[self::FIELD_KEY_DRAFTS];
         if (!$drafts) {
             $example = Emojis::escape($this->taskExample());
             $this->say(
