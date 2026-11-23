@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_PAYLOAD = 'payload';
+
     private const FIELD_KEY_CAPTION = 'caption';
 
     private const FIELD_KEY_DESCRIPTION = 'description';
@@ -77,7 +79,7 @@ final class Worker
         $u = [];
         $thinkingMessageId = null;
         try {
-            $u = json_decode($r['payload'], true, 64, JSON_THROW_ON_ERROR);
+            $u = json_decode($r[self::FIELD_KEY_PAYLOAD], true, 64, JSON_THROW_ON_ERROR);
             $thinking = $this->bot->thinking($u);
             if ($thinking !== null) {
                 try {
