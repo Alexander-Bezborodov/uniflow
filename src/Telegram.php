@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Telegram
 {
+    private const FIELD_KEY_DATA = 'data';
+
     private const FIELD_KEY_URL = 'url';
 
     private Config $config;
@@ -49,7 +51,7 @@ final class Telegram
         if (
             $response['status'] < 200 ||
             $response['status'] >= 300 ||
-            !isset($response['data']['status'], $response['data']['body']) ||
+            !isset($response[self::FIELD_KEY_DATA]['status'], $response['data']['body']) ||
             !is_string($response['data']['body'])
         ) {
             throw new \RuntimeException('invalid_relay_response');
