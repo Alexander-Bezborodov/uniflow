@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Telegram
 {
+    private const FIELD_KEY_URL = 'url';
+
     private Config $config;
     private Http $http;
 
@@ -30,7 +32,7 @@ final class Telegram
             '/' .
             $method;
         $relayPayload = [
-            'url' => $telegramUrl,
+            self::FIELD_KEY_URL => $telegramUrl,
             'method' => 'POST',
             'headers' => ['Content-Type' => 'application/json'],
             'body' => $data,
