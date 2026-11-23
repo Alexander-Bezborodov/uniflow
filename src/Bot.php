@@ -898,7 +898,7 @@ final class Bot
     private function preview(): void
     {
         $this->s['step'] = 'review';
-        $this->s['token'] = $this->token();
+        $this->s[self::FIELD_KEY_TOKEN] = $this->token();
         $this->say($this->l('Нашёл несколько задач:', 'Several tasks found:'), $this->menu());
         foreach ($this->s['drafts'] as $i => $t) {
             $this->say($i + 1 . '. ' . Planner::card($t, $this->now, $this->language));
