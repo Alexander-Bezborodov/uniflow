@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Webhook
 {
+    private const FIELD_KEY_UPDATE_ID = 'update_id';
+
     public static function handle(
         Database $db,
         Worker $worker,
@@ -56,7 +58,7 @@ final class Webhook
         }
         if (
             !is_array($u) ||
-            !isset($u['update_id']) ||
+            !isset($u[self::FIELD_KEY_UPDATE_ID]) ||
             !is_int($u['update_id']) ||
             $u['update_id'] < 0
         ) {
