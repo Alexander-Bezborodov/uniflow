@@ -152,7 +152,7 @@ final class TaskCalendar
                 $ey = $y + 35 + $i * 42;
                 $priority = !empty($event['importance_visible']) ? (int) $event['importance'] : 0;
                 $round($x + 8, $ey, 163, 40, 9, $priority === 3 ? $pink : ($priority === 2 ? $orange : $green));
-                $label = $event['clock'] === '23:59' ? ($en ? 'All day' : 'В течение дня') : $event['clock'];
+                $label = $event[self::FIELD_KEY_CLOCK] === '23:59' ? ($en ? 'All day' : 'В течение дня') : $event['clock'];
                 $text($x + 14, $ey + 16, $label, 11, $muted);
                 $text($x + 14, $ey + 34, preg_replace('/\s+/u', ' ', $event['title']), 13, $ink, 149);
             }
