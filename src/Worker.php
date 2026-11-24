@@ -116,7 +116,7 @@ final class Worker
                         self::FIELD_KEY_TEXT => 'Не удалось получить ответ GigaChat. Попробуйте отправить задачу ещё раз.',
                     ];
                     $method = 'sendMessage';
-                    if (!isset($thinking['payload']['reply_markup']['keyboard'])) {
+                    if (!isset($thinking['payload'][self::FIELD_KEY_REPLY_MARKUP]['keyboard'])) {
                         $method = 'editMessageText';
                         $errorPayload['message_id'] = $thinkingMessageId;
                     }
