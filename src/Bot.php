@@ -646,7 +646,7 @@ final class Bot
             return;
         }
         $this->s = [
-            'drafts' => $drafts,
+            self::FIELD_KEY_DRAFTS => $drafts,
             self::FIELD_KEY_AUTO_SAVE => count($drafts) === 1,
             'source' => 'GigaChat',
         ];
