@@ -89,7 +89,7 @@ final class Worker
                     if (!empty($result[self::FIELD_KEY_OK])) {
                         $thinkingMessageId = $thinking['method'] === 'sendMessage'
                             ? ($result[self::FIELD_KEY_RESULT][self::FIELD_KEY_MESSAGE_ID] ?? null)
-                            : ($thinking['payload']['message_id'] ?? null);
+                            : ($thinking['payload'][self::FIELD_KEY_MESSAGE_ID] ?? null);
                     }
                 } catch (\Throwable $e) {
                 }
