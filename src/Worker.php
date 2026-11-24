@@ -296,7 +296,7 @@ final class Worker
                     $loading['reply_markup'] = ['inline_keyboard' => []];
                 }
                 $progress = $this->telegram->request(isset($p['message_id']) ? 'editMessageText' : 'sendMessage', $loading);
-                if (!empty($progress['ok']) && !isset($p['message_id']) && isset($progress['result']['message_id'])) {
+                if (!empty($progress[self::FIELD_KEY_OK]) && !isset($p['message_id']) && isset($progress['result']['message_id'])) {
                     $p['message_id'] = (int) $progress['result']['message_id'];
                     $this->db->run('UPDATE outbox SET payload=? WHERE id=?', [
                         json_encode($p, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR), $r['id'],
