@@ -154,7 +154,7 @@ final class Parser
             $draft = [
                 'title' => $title,
                 'subject' => $t['subject'] ?? null,
-                'deadline' => null,
+                self::FIELD_KEY_DEADLINE => null,
                 'estimated_minutes' => null,
                 'importance' => 2,
             ];
