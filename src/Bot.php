@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_SUBJECT = 'subject';
+
     private const FIELD_KEY_REMINDERS_DISABLED = 'reminders_disabled';
 
     private const FIELD_KEY_TASKS = 'tasks';
@@ -95,7 +97,7 @@ final class Bot
     public const FIELDS = ['title', 'subject', 'deadline', 'estimated_minutes', 'importance'];
     private const LABELS = [
         'title' => 'Название',
-        'subject' => 'Предмет',
+        self::FIELD_KEY_SUBJECT => 'Предмет',
         self::FIELD_KEY_DEADLINE => 'Дедлайн',
         self::FIELD_KEY_ESTIMATED_MINUTES => 'Длительность',
     ];
