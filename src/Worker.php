@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Worker
 {
+    private const FIELD_KEY_REMINDER_HOURS = 'reminder_hours';
+
     private const FIELD_KEY_METHOD = 'method';
 
     private const FIELD_KEY_PAYLOAD = 'payload';
@@ -264,7 +266,7 @@ final class Worker
                 'SELECT t.*,u.reminders_disabled,u.telegram_blocked FROM tasks t JOIN users u ON u.telegram_id=t.user_id WHERE t.id=?',
                 [$r['task_id']],
             );
-            $hours = (int) $r['reminder_hours'];
+            $hours = (int) $r[self::FIELD_KEY_REMINDER_HOURS];
             $seconds = $t ? strtotime($t['deadline']) - time() : 0;
             if (
                 !$t ||
