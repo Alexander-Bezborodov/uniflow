@@ -357,7 +357,7 @@ final class Worker
                 $this->discard($r);
             });
         } else {
-            $code = (int) ($result['error_code'] ?? 503);
+            $code = (int) ($result[self::FIELD_KEY_ERROR_CODE] ?? 503);
             $attempt = (int) $r['attempts'] + 1;
             if ($code === 429) {
                 $delay = max(1, (int) ($result['parameters']['retry_after'] ?? 30));
