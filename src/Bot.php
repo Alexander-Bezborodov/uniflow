@@ -171,7 +171,7 @@ final class Bot
                     'task_ref' => $i + 1,
                     'title' => $t['title'],
                     self::FIELD_KEY_DEADLINE => Dates::label($t['deadline'], $now),
-                    'estimated_minutes' => (int) $t['estimated_minutes'],
+                    self::FIELD_KEY_ESTIMATED_MINUTES => (int) $t['estimated_minutes'],
                     self::FIELD_KEY_IMPORTANCE => (int) $t['importance'],
                     self::FIELD_KEY_ALLOWED_REASONS => Planner::reasons($t, $now),
                 ];
