@@ -44,7 +44,7 @@ try {
         $info = $r['result'];
         if (!empty($info['url'])) {
             $parts = parse_url($info['url']);
-            $info['url'] = is_array($parts) && isset($parts['scheme'], $parts['host'])
+            $info['url'] = is_array($parts) && isset($parts[\APP_BIN_CONSOLE_PHP_FIELD_KEY_SCHEME], $parts['host'])
                 ? $parts['scheme'] . '://' . $parts['host'] . '/webhook/***'
                 : '***';
         }
