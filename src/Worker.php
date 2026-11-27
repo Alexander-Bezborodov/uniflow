@@ -182,7 +182,7 @@ final class Worker
                     ),
                     self::FIELD_KEY_PARSE_MODE => 'HTML',
                     'reply_markup' => Emojis::inline([[
-                        [$english ? 'Reschedule' : 'Перенести', 'task:reschedule:' . $t['id']],
+                        [$english ? 'Reschedule' : 'Перенести', 'task:reschedule:' . $t[self::FIELD_KEY_ID]],
                         [$english ? '✅ Complete' : '✅ Выполнено', 'task:done:' . $t['id']],
                     ]]),
                 ];
