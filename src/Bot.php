@@ -112,7 +112,7 @@ final class Bot
     public static function identity(array $u): ?array
     {
         $m = $u[self::FIELD_KEY_MESSAGE] ?? ($u[self::FIELD_KEY_CALLBACK_QUERY][self::FIELD_KEY_MESSAGE] ?? null);
-        $from = $u['callback_query'][self::FIELD_KEY_FROM] ?? ($m['from'] ?? null);
+        $from = $u[self::FIELD_KEY_CALLBACK_QUERY][self::FIELD_KEY_FROM] ?? ($m['from'] ?? null);
         if (
             !is_array($m) ||
             !is_array($from) ||
