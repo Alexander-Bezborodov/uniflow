@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_TIMEZONE = 'timezone';
+
     private const FIELD_KEY_CHAT = 'chat';
 
     private const FIELD_KEY_SUBJECT = 'subject';
@@ -140,7 +142,7 @@ final class Bot
         $text = $u['message'][self::FIELD_KEY_TEXT] ?? '';
         $callback = $u['callback_query'][self::FIELD_KEY_DATA] ?? '';
         $user = $this->db->one('SELECT ai_consent,language,timezone FROM users WHERE telegram_id=?', [$from['id']]);
-        if (!empty($user['timezone'])) {
+        if (!empty($user[self::FIELD_KEY_TIMEZONE])) {
             $now = $now->setTimezone(new \DateTimeZone($user['timezone']));
         }
         if (!$this->ai->available()) {
