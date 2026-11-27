@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_CHAT = 'chat';
+
     private const FIELD_KEY_SUBJECT = 'subject';
 
     private const FIELD_KEY_REMINDERS_DISABLED = 'reminders_disabled';
@@ -116,7 +118,7 @@ final class Bot
         if (
             !is_array($m) ||
             !is_array($from) ||
-            ($m['chat']['type'] ?? '') !== 'private' ||
+            ($m[self::FIELD_KEY_CHAT]['type'] ?? '') !== 'private' ||
             !isset($from['id']) ||
             !is_int($from['id']) ||
             ($m['chat']['id'] ?? null) !== $from['id'] ||
