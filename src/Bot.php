@@ -913,7 +913,7 @@ final class Bot
         foreach ($this->s['drafts'] as $i => $t) {
             $this->say($i + 1 . '. ' . Planner::card($t, $this->now, $this->language));
         }
-        $token = $this->s['token'];
+        $token = $this->s[self::FIELD_KEY_TOKEN];
         $this->say(
             $this->l('Добавить найденные задачи?', 'Add the tasks found?'),
             Emojis::inline([
