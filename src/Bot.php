@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_ACTION = 'action';
+
     private const FIELD_KEY_STEP = 'step';
 
     private const FIELD_KEY_TIMEZONE = 'timezone';
@@ -153,7 +155,7 @@ final class Bot
         $parse = $this->shouldParseWithAi($state, $user, $text);
         $explain =
             ($state[self::FIELD_KEY_STEP] ?? '') === 'ai_choice' &&
-            ($state['action'] ?? '') === 'explain' &&
+            ($state[self::FIELD_KEY_ACTION] ?? '') === 'explain' &&
             $callback === 'ai:' . ($state[self::FIELD_KEY_TOKEN] ?? '') . ':provider';
         if (!$parse && !$explain) {
             return [];
