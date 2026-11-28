@@ -6,6 +6,8 @@ namespace UniFlow;
 
 final class Bot
 {
+    private const FIELD_KEY_FAILED = 'failed';
+
     private const FIELD_KEY_ACTION = 'action';
 
     private const FIELD_KEY_STEP = 'step';
@@ -162,7 +164,7 @@ final class Bot
         }
         $rate = $this->db->getCache('ai_rate_' . $from['id']);
         if ($rate && (int) $rate['value'] > time() - 2) {
-            return ['failed' => true];
+            return [self::FIELD_KEY_FAILED => true];
         }
         $this->db->setCache('ai_rate_' . $from['id'], (string) time());
         try {
