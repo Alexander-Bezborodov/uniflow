@@ -208,7 +208,7 @@ final class Bot
             foreach ($result['steps'] as $i => $step) {
                 if (
                     ($step['task_ref'] ?? null) !== $i + 1 ||
-                    !in_array($step[self::FIELD_KEY_REASON] ?? '', $facts[$i]['allowed_reasons'], true) ||
+                    !in_array($step[self::FIELD_KEY_REASON] ?? '', $facts[$i][self::FIELD_KEY_ALLOWED_REASONS], true) ||
                     !isset($step[self::FIELD_KEY_ADVICE]) ||
                     !is_string($step['advice']) ||
                     mb_strlen(trim($step['advice'])) < 10 ||
